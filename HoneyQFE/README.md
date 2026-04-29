@@ -57,3 +57,12 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+## Making a docker container
+1) docker build .
+2) docker save -o <myimage.tar.gz> <image name>
+3) copy to the host machine
+4) load the image with: sudo docker load -i <myimage.tar.gz>
+5) edit the docker settings file for honeyqfe
+6) sudo docker compose up -d
