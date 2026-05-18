@@ -18,3 +18,4 @@ https://console.cloud.google.com/welcome?project=honeyq
 https://developers.facebook.com/apps/1720390452454311/go_live/
 
 https://docs.spring.io/spring-security/reference/reactive/oauth2/resource-server/jwt.html
+https://stackoverflow.com/questions/74538964/spring-oauth2-resource-server-with-google-authorization-server
