@@ -8,3 +8,10 @@
 
 ## Database
 You have to manually add the database to the postgres server
+
+## OAuth2 Providers
+### Google
+https://console.cloud.google.com/welcome?project=honeyq
+
+### Facebook
+https://developers.facebook.com/apps/1720390452454311/go_live/
