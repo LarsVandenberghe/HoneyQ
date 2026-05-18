@@ -60,8 +60,8 @@ For more information on using the Angular CLI, including detailed command refere
 
 
 ## Making a docker container
-1) docker build .
-2) docker save -o <myimage.tar.gz> <image name>
+1) docker build -t honeyqfe .
+2) docker save -o honeyqfe.tar.gz honeyqfe
 3) copy to the host machine
 4) load the image with: sudo docker load -i <myimage.tar.gz>
 5) edit the docker settings file for honeyqfe
