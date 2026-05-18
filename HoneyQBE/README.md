@@ -5,3 +5,6 @@
 4) load the image with: sudo docker load -i <myimage.tar.gz>
 5) edit the docker settings file for honeyqfe
 6) sudo docker compose up -d
+
+## Database
+You have to manually add the database to the postgres server
