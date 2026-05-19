@@ -1,6 +1,6 @@
 import { Component, effect, inject, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthGoogleService } from './services/auth-google.service';
+import { AuthService } from './services/auth.service';
 import { ArticleService } from './services/article.service';
 
 
@@ -11,7 +11,7 @@ import { ArticleService } from './services/article.service';
   styleUrl: './app.css'
 })
 export class App {
-  private authService = inject(AuthGoogleService);
+  private authService = inject(AuthService);
   private articleService = inject(ArticleService);
   
   protected readonly title = signal('HoneyQFE');
@@ -19,12 +19,16 @@ export class App {
 
   profile = this.authService.profile
 
-  effect = effect(profile => {
-    console.log(profile);
+  effect = effect(() => {
+    console.log(this.profile());
   })
 
-  signInWithGoogle() {
+  signIn() {
     this.authService.login();
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   callArticle() {

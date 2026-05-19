@@ -16,9 +16,9 @@ export const appConfig: ApplicationConfig = {
 };
 
 export const authConfig: AuthConfig = {
-  issuer: 'https://accounts.google.com',
+  issuer: 'http://localhost:8081/realms/master',
   redirectUri: window.location.origin,
-  clientId: '347163991079-45e95m99907r6hqvtj182nad4uismkdb.apps.googleusercontent.com',
+  clientId: '347163991079-45e95m99907r6hqvtj182nad4uismkdb',
   scope: 'openid profile email',
   strictDiscoveryDocumentValidation: false,
 };

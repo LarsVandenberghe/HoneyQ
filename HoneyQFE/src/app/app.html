@@ -1,18 +1,20 @@
 <div  class="flex">
 
-  @if(profile != null){
-    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="signInWithGoogle()">
+  @if(!profile()){
+    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="signIn()">
       <div class="flex">
-        <img src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-        alt="Google"
-        class="google-icon"
-        style="height: 25px"
-      />Sign in with Google
+        Sign in
+      </div>
+    </button>
+  } @else {
+    <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="logout()">
+      <div class="flex">
+        Logout
       </div>
     </button>
   }
 
 
-  <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="callArticle()">Lala</button>
+  <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" (click)="callArticle()">Get data</button>
   {{article()}}
 </div>
