@@ -1,6 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { inject } from '@angular/core';
 import { OAuthStorage } from 'angular-oauth2-oidc';
-import { HttpEvent, HttpHandler, HttpHandlerFn, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 

@@ -33,3 +33,5 @@ Add a realm, new client with guid client ID
 realm settings => User registration, remember me, Email as username, etc
 
 set as valid redirect uris both the root FE (this is for returning after logout) as the auth-redirect uri
+
+display html: <span style="color: wheat; font-size: 4rem; font-family: system-ui, -apple-sy; text-transform: none; font-weight: bolder; background: -webkit-linear-gradient(315deg, #e06c00 0%, #ffee00 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">HoneyQ</span>
