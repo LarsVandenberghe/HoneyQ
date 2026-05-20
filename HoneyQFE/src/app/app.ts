@@ -14,6 +14,7 @@ export class App {
   
   protected readonly title = signal('HoneyQFE');
   validToken = this.authService.validToken;
+  profile = this.authService.profile;
 
   logout() {
     this.authService.logout();

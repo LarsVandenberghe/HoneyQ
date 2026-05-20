@@ -13,21 +13,17 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-      </ul>
-      <!-- <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
+      </ul>-
       <div class="d-flex">
-        <button class="btn btn-light mr-2" role="button">
+        <button class="btn btn-light me-2" role="button">
           <fa-icon [icon]="faBasketShopping" /> Bestellingen
         </button>
         <div ngbDropdown class="nav-item">
           <button ngbDropdownToggle class="btn btn-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <fa-icon [icon]="faUser" /> Account
+            <fa-icon [icon]="faUser" />
           </button>
           <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
-            <li><a ngbDropdownItem href="#">Action</a></li>
+            <li><div ngbDropdownItem>{{profileName()}}</div></li>
             <li>
               <hr class="dropdown-divider">
             </li>

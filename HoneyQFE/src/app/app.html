@@ -1,6 +1,6 @@
 <div  class="flex">
   @if(validToken()){
-    <app-header (onLogout)="logout()"></app-header>
+    <app-header (onLogout)="logout()" [profile]="profile()"></app-header>
   }
 </div>
 <router-outlet></router-outlet>
