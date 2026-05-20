@@ -31,3 +31,5 @@ docker run --name keycloak -p 8081:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e 
 Add a realm, new client with guid client ID
 
 realm settings => User registration, remember me, Email as username, etc
+
+set as valid redirect uris both the root FE (this is for returning after logout) as the auth-redirect uri

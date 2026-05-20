@@ -1,0 +1,27 @@
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+
+
+$body-bg: #ffffff;
+$body-color: #111;
+
+$primary: $orange;
+
+
+$theme-colors: map-merge($theme-colors, (
+  "primary": $primary
+));
+
+html, body {
+    height:100%;
+    overflow: auto;
+}
+
+
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+@import 'bootstrap/scss/bootstrap';

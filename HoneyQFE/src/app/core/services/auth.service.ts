@@ -41,7 +41,7 @@ export class AuthService {
         this.#oAuthService.revokeTokenAndLogout();
         this.#oAuthService.logOut();
         this.profile.set(null);
-        this.#router.navigateByUrl('');
+        this.#router.navigateByUrl('home');
     }
 
     #validateTokenOnEvent(event: OAuthEvent): void {
