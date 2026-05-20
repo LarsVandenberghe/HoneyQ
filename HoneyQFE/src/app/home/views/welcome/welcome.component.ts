@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class WelcomeComponent {
   private authService = inject(AuthService);
+
+  validToken = this.authService.validToken
   
   signIn() {
     this.authService.login();
