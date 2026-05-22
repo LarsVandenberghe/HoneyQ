@@ -1,1 +1,16 @@
-{{article()}}
+
+<div style="display: flex; gap: 2rem; padding: 10px 0px">
+    @if (articles(); as articles) {
+        @for (article of articles; track article.id) {
+            <div class="card" style="width: 18rem;">
+                <img [src]="article.imageUrl" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{article.name}}</h5>
+                    <p class="card-text">{{article.description}}</p>
+                    <a (click)="openArticleDialog(article.id)" class="btn btn-primary">Toevoegen aan winkelmand</a>
+                </div>
+            </div>
+        }
+    }
+
+</div>

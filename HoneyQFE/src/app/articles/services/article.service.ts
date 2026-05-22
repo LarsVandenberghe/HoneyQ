@@ -8,7 +8,14 @@ import { Observable } from "rxjs";
 export class ArticleService {
     httpClient = inject(HttpClient)
 
-    getAll(): Observable<any> {
-        return this.httpClient.get("http://localhost:8080/article")
+    getAll(): Observable<IArticle[]> {
+        return this.httpClient.get<IArticle[]>("http://localhost:8080/article")
     }
+}
+
+export interface IArticle {
+    id: number;
+    name: String;
+    description: String;
+    imageUrl: String;
 }

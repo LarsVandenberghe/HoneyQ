@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
-import { ArticleService } from '../../services/article.service';
+import { ArticleService, IArticle } from '../../services/article.service';
 
 @Component({
   selector: 'app-article-overview.component',
@@ -10,9 +10,13 @@ import { ArticleService } from '../../services/article.service';
 })
 export class ArticleOverviewComponent implements OnInit {
   articleService = inject(ArticleService)
-  protected readonly article: WritableSignal<null | any> = signal(null);
+  protected readonly articles: WritableSignal<null | IArticle[]> = signal(null);
   
   ngOnInit(): void {
-    this.articleService.getAll().subscribe(all => this.article.set(JSON.stringify(all)));
+    this.articleService.getAll().subscribe(all => this.articles.set((all)));
+  }
+
+  openArticleDialog(id: number): void {
+    console.log("open dialog om hoeveelheid toe te voegen aan winkelmand.", id)
   }
 }
