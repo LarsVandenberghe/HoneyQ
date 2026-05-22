@@ -1,9 +1,12 @@
 package be.honeyq.HoneyQBE.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,20 +15,27 @@ public class Article {
     
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Long id;
     private String name;
-    private String translationKey;
+    private String description;
 
     @Column(
 		nullable = true
 	)
     private String imageUrl;
 
+    @OneToMany(mappedBy="article")
+    private Set<Stock> stock;
 
-    public Integer getId() {
+    @OneToMany(mappedBy="article")
+    private Set<Reservation> reservation;
+
+    Article(){}
+
+    public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -36,12 +46,17 @@ public class Article {
         this.name = name;
     }
 
-    public String getTranslationKey() {
-        return translationKey;
+    public String getDescription() {
+        return description;
     }
-    public void setTranslationKey(String translationKey) {
-        this.translationKey = translationKey;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    Article(){}
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 }
