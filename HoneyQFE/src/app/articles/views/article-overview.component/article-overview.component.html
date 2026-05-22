@@ -6,7 +6,7 @@
                 <img [src]="article.imageUrl" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{article.name}}</h5>
-                    <p class="card-text">{{article.description}}</p>
+                    <p class="card-text" [innerHTML]="article.description"></p>
                     <a (click)="openArticleDialog(article.id)" class="btn btn-primary">Toevoegen aan winkelmand</a>
                 </div>
             </div>
