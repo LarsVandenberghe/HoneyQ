@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 
 import be.honeyq.HoneyQBE.model.User;
-import be.honeyq.HoneyQBE.repository.ArticleRepository;
 import be.honeyq.HoneyQBE.repository.UserRepository;
 
 import java.util.Collection;
