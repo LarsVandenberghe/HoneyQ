@@ -38,6 +38,7 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/public/**").permitAll()
                 .requestMatchers("/article/**").hasRole("validated_user")
+                .requestMatchers("/cart/**").hasRole("validated_user")
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2

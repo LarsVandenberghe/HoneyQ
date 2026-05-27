@@ -18,6 +18,8 @@ public class Article {
 	private Long id;
     private String name;
     private String description;
+    private Double weightKg = 0.0;
+    private Boolean isBulk = false;
 
     @Column(
 		nullable = true
@@ -28,7 +30,7 @@ public class Article {
     private Set<Stock> stock;
 
     @OneToMany(mappedBy="article")
-    private Set<Reservation> reservation;
+    private Set<OrderDetail> orderDetail;
 
     Article(){}
 
@@ -58,5 +60,37 @@ public class Article {
     }
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Set<Stock> getStock() {
+        return stock;
+    }
+
+    public void setStock(Set<Stock> stock) {
+        this.stock = stock;
+    }
+
+    public Set<OrderDetail> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(Set<OrderDetail> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public Double getWeightKg() {
+        return weightKg;
+    }
+
+    public void setWeightKg(Double weightKg) {
+        this.weightKg = weightKg;
+    }
+
+    public Boolean getIsBulk() {
+        return isBulk;
+    }
+
+    public void setIsBulk(Boolean isBulk) {
+        this.isBulk = isBulk;
     }
 }

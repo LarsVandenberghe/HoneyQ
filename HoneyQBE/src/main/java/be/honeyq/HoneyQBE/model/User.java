@@ -1,20 +1,18 @@
 package be.honeyq.HoneyQBE.model;
 
+import java.util.Set;
 import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user_details")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    UUID id;
+    private UUID id;
 
     private String emailAddress;
 
@@ -28,11 +26,18 @@ public class User {
 	)
     private String lastName;
 
+    @OneToMany(mappedBy="user")
+    private Set<Order> orders;
 
     public User(String emailAddress, String firstName, String lastName) {
         this.emailAddress = emailAddress;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public User(UUID id, String emailAddress, String firstName, String lastName) {
+        this(emailAddress, firstName, lastName);
+        this.id = id;
     }
 
     User(){}
@@ -66,5 +71,13 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> order) {
+        this.orders = order;
     }
 }

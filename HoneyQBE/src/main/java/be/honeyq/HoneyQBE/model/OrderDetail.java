@@ -1,33 +1,41 @@
 package be.honeyq.HoneyQBE.model;
 
+import java.util.UUID;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+// This is the current state of cart for a user one to one relation with user
 @Entity
-@Table(name = "stock")
-public class Stock {
-
+@Table(name = "order_detail")
+public class OrderDetail {
+    
   @Id
-  @GeneratedValue
-  private Long id;
-  
+  @GeneratedValue(strategy = GenerationType.UUID)
+  private UUID id;
+
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name="article_id", nullable=false, referencedColumnName = "id")
   private Article article;
 
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name="order_id", nullable=false, referencedColumnName = "id")
+  private Order order;
+
   private Double quantity;
 
-  Stock(){}
+  OrderDetail(){}
 
-  public Long getId() {
+  public UUID getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -39,6 +47,14 @@ public class Stock {
     this.article = article;
   }
 
+  public Order getOrder() {
+    return order;
+  }
+
+  public void setOrder(Order order) {
+    this.order = order;
+  }
+
   public Double getQuantity() {
     return quantity;
   }
@@ -46,5 +62,4 @@ public class Stock {
   public void setQuantity(Double quantity) {
     this.quantity = quantity;
   }
-
 }

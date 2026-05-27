@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import be.honeyq.HoneyQBE.model.Article;
+import be.honeyq.HoneyQBE.dto.SimpleArticleDto;
 import be.honeyq.HoneyQBE.repository.ArticleRepository;
 
 @RestController
@@ -23,14 +22,15 @@ public class ArticleController {
     private ArticleRepository articleRepository;
 
     @GetMapping("")
-	public List<Article> findAll() {
-		return articleRepository.findAll();
+	public List<SimpleArticleDto> findAll() {
+		return articleRepository.findAll().stream().map(article -> SimpleArticleDto.fromDomain(article)).toList();
 	}
 
     @GetMapping("/{id}")
-	public Article findById(@PathVariable Integer id) {
+	public SimpleArticleDto findById(@PathVariable Integer id) {
 		return articleRepository
 				.findById(id)
+				.map(article -> SimpleArticleDto.fromDomain(article))
 				.orElseThrow(() -> new ResponseStatusException(
 						HttpStatus.NOT_FOUND,
 						"Content not found!"

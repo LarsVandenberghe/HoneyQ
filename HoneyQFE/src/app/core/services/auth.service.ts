@@ -25,6 +25,7 @@ export class AuthService {
         this.#oAuthService.loadDiscoveryDocumentAndTryLogin().then(() => {
             if (this.#oAuthService.hasValidIdToken()) {
                 this.profile.set(this.#oAuthService.getIdentityClaims());
+                console.log(this.profile());
             }
         });
 

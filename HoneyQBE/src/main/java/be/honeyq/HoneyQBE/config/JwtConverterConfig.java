@@ -14,6 +14,7 @@ import be.honeyq.HoneyQBE.repository.UserRepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Configuration
 public class JwtConverterConfig {
@@ -51,9 +52,11 @@ public class JwtConverterConfig {
         var email = jwt.getClaimAsString("email");
         var firstName = jwt.getClaimAsString("given_name");
         var lastName = jwt.getClaimAsString("family_name");
-        var userEntity = userRepository.findByEmailAddress(email);
+        var id = UUID.fromString(jwt.getClaimAsString("sub"));
+
+        var userEntity = userRepository.findById(id).orElse(null);
         if (userEntity == null) {
-            var user = new User(email, firstName, lastName);
+            var user = new User(id, email, firstName, lastName);
             userRepository.save(user);
         }
     }
