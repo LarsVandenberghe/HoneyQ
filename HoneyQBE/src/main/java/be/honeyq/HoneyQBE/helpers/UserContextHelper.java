@@ -26,9 +26,6 @@ public class UserContextHelper {
             .filter(role -> role.equals("ROLE_validated_user"))
             .findFirst();
 
-        List<String> roles = authorities.stream()
-            .map(GrantedAuthority::getAuthority).toList();
-
         return validatedUserRole.isPresent();
     }
 }
