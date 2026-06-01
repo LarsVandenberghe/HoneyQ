@@ -25,7 +25,6 @@ export class AuthService {
         this.#oAuthService.loadDiscoveryDocumentAndTryLogin().then(() => {
             if (this.#oAuthService.hasValidIdToken()) {
                 this.profile.set(this.#oAuthService.getIdentityClaims());
-                console.log(this.profile());
             }
         });
 
@@ -45,11 +44,13 @@ export class AuthService {
         this.#router.navigateByUrl('home');
     }
 
+    refreshToken(): Promise<OAuthEvent> {
+        return this.#oAuthService.silentRefresh();
+    }
+
     #validateTokenOnEvent(event: OAuthEvent): void {
         if (event instanceof OAuthErrorEvent) {
             console.error(event);
-        } else {
-            console.warn(event);
         }
         
         this.validToken.set(this.#oAuthService.hasValidAccessToken());

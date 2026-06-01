@@ -20,6 +20,7 @@ public class Article {
     private String description;
     private Double weightKg = 0.0;
     private Boolean isBulk = false;
+    private Double priceInEUR;
 
     @Column(
 		nullable = true
@@ -92,5 +93,13 @@ public class Article {
 
     public void setIsBulk(Boolean isBulk) {
         this.isBulk = isBulk;
+    }
+
+    public Double getPriceInEUR() {
+        return priceInEUR;
+    }
+
+    public void setPriceInEUR(Double priceInEUR) {
+        this.priceInEUR = priceInEUR;
     }
 }

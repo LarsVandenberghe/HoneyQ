@@ -12,6 +12,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 })
 export class HeaderComponent {
   onLogout = output<void>();
+  onOpenCart = output<void>();
   profile = input<any>();
 
   profileName = computed(() => {
@@ -33,5 +34,9 @@ export class HeaderComponent {
 
   logout(): void {
     this.onLogout.emit();
+  }
+
+  openCart(): void {
+    this.onOpenCart.emit();
   }
 }

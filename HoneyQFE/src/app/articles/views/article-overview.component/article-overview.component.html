@@ -1,16 +1,8 @@
 
-<div style="display: flex; gap: 2rem; padding: 10px 0px">
+<div class="d-flex" style="gap: 2rem; margin: 10px">
     @if (articles(); as articles) {
         @for (article of articles; track article.id) {
-            <div class="card" style="width: 18rem;">
-                <img [src]="article.imageUrl" class="card-img-top p-2" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">{{article.name}}</h5>
-                    <p class="card-text" [innerHTML]="article.description"></p>
-                    <a (click)="openArticleDialog(article.id)" class="btn btn-primary">Toevoegen aan winkelmand</a>
-                </div>
-            </div>
+            <app-article [article]="article"></app-article>
         }
     }
-
 </div>

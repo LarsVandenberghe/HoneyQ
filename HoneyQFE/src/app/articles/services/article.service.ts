@@ -15,7 +15,12 @@ export class ArticleService {
 
 export interface IArticle {
     id: number;
-    name: String;
-    description: String;
-    imageUrl: String;
+    name: string;
+    description: string;
+    imageUrl: string;
+    isBulk: boolean;
+    reservedStock: number;
+    amountOfStock: number;
+    weightKg: number;
+    priceInEUR: number;
 }

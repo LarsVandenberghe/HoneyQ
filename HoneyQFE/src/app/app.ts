@@ -1,7 +1,8 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, TemplateRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from './shared/header/header.component';
+import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,18 @@ import { HeaderComponent } from './shared/header/header.component';
   styleUrl: './app.scss'
 })
 export class App {
-  private authService = inject(AuthService);
-  
-  protected readonly title = signal('HoneyQFE');
-  validToken = this.authService.validToken;
-  profile = this.authService.profile;
+  #authService = inject(AuthService);
+  #offcanvasService = inject(NgbOffcanvas);
 
-  logout() {
-    this.authService.logout();
+  protected readonly title = signal('HoneyQFE');
+  validToken = this.#authService.validToken;
+  profile = this.#authService.profile;
+
+  logout(): void {
+    this.#authService.logout();
+  }
+
+  openCart(content: TemplateRef<any>): void {
+    this.#offcanvasService.open(content, { position: 'end' });
   }
 }

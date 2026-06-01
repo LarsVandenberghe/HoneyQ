@@ -9,7 +9,8 @@ public class SimpleArticleDto {
     private Double weightKg;
     private Boolean isBulk;
     private String imageUrl;
-	private Double amountOfStock;
+    private Double priceInEUR;
+    private Double amountOfStock;
 	private Double reservedStock;
 
     public static SimpleArticleDto fromDomain(Article article) {
@@ -20,6 +21,7 @@ public class SimpleArticleDto {
         simpleArticle.imageUrl = article.getImageUrl();
 		simpleArticle.weightKg = article.getWeightKg();
 		simpleArticle.isBulk = article.getIsBulk();
+        simpleArticle.priceInEUR = article.getPriceInEUR();
 		simpleArticle.amountOfStock = article.getStock().stream().map(stockItem -> stockItem.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
 		simpleArticle.reservedStock = article.getOrderDetail().stream().map(orderDetail -> orderDetail.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
         return simpleArticle;
@@ -47,6 +49,10 @@ public class SimpleArticleDto {
 
     public String getImageUrl() {
         return imageUrl;
+    }
+
+	public Double getPriceInEUR() {
+        return priceInEUR;
     }
 
     public Double getAmountOfStock() {
