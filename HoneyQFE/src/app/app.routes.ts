@@ -1,8 +1,9 @@
 import { Routes } from '@angular/router';
 import { AuthRedirectComponent } from './shared/auth-redirect/auth-redirect.component';
 import { ArticleOverviewComponent } from './articles/views/article-overview.component/article-overview.component';
-import { authGuard, userPrivilegeGuard } from './core/auth-guard/auth-guard';
+import { AuthGuard, UserPrivilegeGuard } from './core/auth-guard/auth-guard';
 import { WaitingForApprovalComponent } from './waiting-for-approval/waiting-for-approval.component';
+import { SilentRefreshComponent } from './shared/silent-refresh/silent-refresh.component';
 
 export const routes: Routes = [
   {
@@ -20,13 +21,17 @@ export const routes: Routes = [
     component: AuthRedirectComponent
   },
   {
+    path: 'silent-refresh', // this is needed when the token has to be refreshed in the background.
+    component: SilentRefreshComponent
+  },
+  {
     path: 'waiting-for-approval', // this is needed because the root redirects to home and the auth parameters are gone.
     component: WaitingForApprovalComponent,
-    canMatch: [authGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'articles',
     component: ArticleOverviewComponent,
-    canMatch: [userPrivilegeGuard],
+    canActivate: [UserPrivilegeGuard],
   },
 ];

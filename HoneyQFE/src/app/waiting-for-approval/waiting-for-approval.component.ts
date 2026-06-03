@@ -1,9 +1,8 @@
-import { ChangeDetectionStrategy, Component, DestroyRef, inject, OnDestroy, OnInit } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { UserPrivilegeService } from "../core/services/user-privilege.service";
 import { AuthService } from "../core/services/auth.service";
 import { tap, timer } from "rxjs";
 
@@ -16,20 +15,17 @@ import { tap, timer } from "rxjs";
 }) export class WaitingForApprovalComponent {
 
     faHourglassHalf = faHourglassHalf
-    router = inject(Router);
-    userPrivilegeService = inject(UserPrivilegeService);
-    authService = inject(AuthService);
-    destroyRef = inject(DestroyRef);
+    #router = inject(Router);
+    #authService = inject(AuthService);
 
     backToHomePage(): void {
-        this.authService.logout();
+        this.#authService.logout();
     }
 
-    backProceedToArticles(): void {
-        this.userPrivilegeService.clearCache();
-        this.authService.refreshToken();
-        timer(1000).pipe(
-            tap(() => this.router.navigate(['articles']))
+    proceedToArticles(): void {
+        this.#authService.refreshToken();
+        timer(2000).pipe(
+            tap(() => this.#router.navigate(['articles']))
         ).subscribe();
     }
 }

@@ -1,7 +1,6 @@
 package be.honeyq.HoneyQBE.helpers;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.security.core.GrantedAuthority;

@@ -12,13 +12,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([oauthInterceptor])),
     provideOAuthClient(),
-    {provide: LOCALE_ID, useValue: 'nl' }
+    { provide: LOCALE_ID, useValue: 'nl' }
   ]
 };
 
 export const authConfig: AuthConfig = {
   issuer: 'http://localhost:8081/realms/master',
   redirectUri: `${window.location.origin}/auth-redirect`,
+  silentRefreshRedirectUri: `${window.location.origin}/silent-refresh`,
   postLogoutRedirectUri: window.location.origin,
   clientId: '347163991079-45e95m99907r6hqvtj182nad4uismkdb',
   scope: 'openid profile email',
