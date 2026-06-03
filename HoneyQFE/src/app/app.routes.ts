@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthRedirectComponent } from './shared/auth-redirect/auth-redirect.component';
-import { ArticleOverviewComponent } from './articles/views/article-overview.component/article-overview.component';
+import { ArticleOverviewComponent } from './articles/views/article-overview/article-overview.component';
 import { AuthGuard, UserPrivilegeGuard } from './core/auth-guard/auth-guard';
 import { WaitingForApprovalComponent } from './waiting-for-approval/waiting-for-approval.component';
 import { SilentRefreshComponent } from './shared/silent-refresh/silent-refresh.component';

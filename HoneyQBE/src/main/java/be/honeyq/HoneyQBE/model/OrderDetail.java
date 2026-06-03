@@ -30,6 +30,12 @@ public class OrderDetail {
 
   private Double quantity;
 
+  public OrderDetail(Article article, Order order, Double quantity) {
+    this.article = article;
+    this.order = order;
+    this.quantity = quantity;
+  }
+
   OrderDetail(){}
 
   public UUID getId() {

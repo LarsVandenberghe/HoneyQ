@@ -5,12 +5,13 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthConfig, provideOAuthClient } from 'angular-oauth2-oidc';
 import { oauthInterceptor } from './core/interceptors/oauth.interceptor';
+import { errorInterceptor } from './core/interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
-    provideHttpClient(withInterceptors([oauthInterceptor])),
+    provideHttpClient(withInterceptors([oauthInterceptor, errorInterceptor])),
     provideOAuthClient(),
     { provide: LOCALE_ID, useValue: 'nl' }
   ]

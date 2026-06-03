@@ -6,31 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-import be.honeyq.HoneyQBE.dto.SimpleArticleDto;
-import be.honeyq.HoneyQBE.repository.ArticleRepository;
+
+import be.honeyq.HoneyQBE.dto.SimpleOrderDto;
+import be.honeyq.HoneyQBE.helpers.UserContextHelper;
+import be.honeyq.HoneyQBE.repository.UserRepository;
 
 @RestController
-@RequestMapping("article")
+@RequestMapping("order")
 @CrossOrigin
-public class ArticleController {
-
+public class OrderController {
     @Autowired
-    private ArticleRepository articleRepository;
+    private UserRepository userRepository;
 
-    @GetMapping("")
-	public List<SimpleArticleDto> findAll() {
-		return articleRepository.findAll().stream().map(article -> SimpleArticleDto.fromDomain(article)).toList();
-	}
+    @GetMapping("my-orders")
+	public List<SimpleOrderDto> findByUser() {
+        var userId = UserContextHelper.getUserUUID();
 
-    @GetMapping("/{id}")
-	public SimpleArticleDto findById(@PathVariable Long id) {
-		return articleRepository
-				.findById(id)
-				.map(article -> SimpleArticleDto.fromDomain(article))
+		return userRepository
+				.findById(userId).map(user -> user.getOrders())
+				.map(orders -> orders.stream().map(order -> SimpleOrderDto.fromDomain(order)).toList())
 				.orElseThrow(() -> new ResponseStatusException(
 						HttpStatus.NOT_FOUND,
 						"Content not found!"

@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 
 
 export function oauthInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
-        
     let url = req.url.toLowerCase();
     let authStorage = inject(OAuthStorage);
 
@@ -20,7 +19,6 @@ export function oauthInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Ob
         }
     
     return next(req);
-
 }
 
     

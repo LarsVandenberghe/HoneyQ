@@ -6,10 +6,11 @@ import { Observable } from "rxjs";
     providedIn: 'root',
 })
 export class ArticleService {
-    httpClient = inject(HttpClient)
+    #httpClient = inject(HttpClient);
+    #url = "http://localhost:8080/";
 
     getAll(): Observable<IArticle[]> {
-        return this.httpClient.get<IArticle[]>("http://localhost:8080/article")
+        return this.#httpClient.get<IArticle[]>(this.#url + "article");
     }
 }
 

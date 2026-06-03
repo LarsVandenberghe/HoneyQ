@@ -1,7 +1,10 @@
 package be.honeyq.HoneyQBE.model;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.UUID;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -75,6 +78,11 @@ public class User {
 
     public Set<Order> getOrders() {
         return orders;
+    }
+
+    public List<Order> getCart() {
+        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.CART, OrderStatus.SENT});
+        return orders.stream().filter(o -> statusses.contains(o.getStatus())).toList();
     }
 
     public void setOrders(Set<Order> order) {

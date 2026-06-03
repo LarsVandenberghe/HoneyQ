@@ -1,0 +1,18 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-img-top d-flex justify-content-center">
+        <img [src]="article().imageUrl" class="m-3" style="max-width: 250px;" alt="...">
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">{{article().name}}</h5>
+        <p class="card-text" [innerHTML]="article().description"></p>
+        <p class="card-text" style="font-weight: bolder; font-size: 1.6rem">€ {{article().priceInEUR | number:'1.2-2':'nl-BE'}}</p>
+        <h6>Voorraad</h6>
+        <ngb-progressbar class="mb-3" type="secondary" [value]="availableStock()" [striped]="true" [animated]="true"
+            ><i>{{availableStockLabel()}}</i></ngb-progressbar
+        >
+        <button (click)="openArticleDialog()" class="btn btn-primary">
+            <fa-icon [icon]="faBasketShopping" /> Toevoegen aan winkelmand
+        </button>
+    </div>
+</div>

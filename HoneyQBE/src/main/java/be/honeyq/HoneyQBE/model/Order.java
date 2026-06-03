@@ -31,6 +31,12 @@ public class Order {
 
   private OrderStatus status = OrderStatus.CART;
 
+  public Order(Set<OrderDetail> orderDetails, User user, OrderStatus status) {
+    this.orderDetails = orderDetails;
+    this.user = user;
+    this.status = status;
+  }
+
   Order(){}
 
   public UUID getId() {

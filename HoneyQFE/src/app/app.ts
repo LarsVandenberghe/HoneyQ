@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainer } from './shared/toast-container/toast-container.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, ToastsContainer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

@@ -1,8 +1,0 @@
-
-<div class="d-flex" style="gap: 2rem; margin: 10px">
-    @if (articles(); as articles) {
-        @for (article of articles; track article.id) {
-            <app-article [article]="article"></app-article>
-        }
-    }
-</div>

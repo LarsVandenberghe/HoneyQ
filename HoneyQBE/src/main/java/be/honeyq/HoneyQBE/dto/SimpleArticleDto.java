@@ -1,6 +1,9 @@
 package be.honeyq.HoneyQBE.dto;
 
+import java.util.Arrays;
+
 import be.honeyq.HoneyQBE.model.Article;
+import be.honeyq.HoneyQBE.model.OrderStatus;
 
 public class SimpleArticleDto {
 	private Long id;
@@ -14,6 +17,8 @@ public class SimpleArticleDto {
 	private Double reservedStock;
 
     public static SimpleArticleDto fromDomain(Article article) {
+        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID});
+
 		var simpleArticle = new SimpleArticleDto();
 		simpleArticle.id = article.getId();
 		simpleArticle.name = article.getName();
@@ -23,7 +28,7 @@ public class SimpleArticleDto {
 		simpleArticle.isBulk = article.getIsBulk();
         simpleArticle.priceInEUR = article.getPriceInEUR();
 		simpleArticle.amountOfStock = article.getStock().stream().map(stockItem -> stockItem.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
-		simpleArticle.reservedStock = article.getOrderDetail().stream().map(orderDetail -> orderDetail.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
+		simpleArticle.reservedStock = article.getOrderDetail().stream().filter(od -> statusses.contains(od.getOrder().getStatus())).map(orderDetail -> orderDetail.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
         return simpleArticle;
 	}
 
