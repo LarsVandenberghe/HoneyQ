@@ -16,8 +16,14 @@
         </li> -->
       </ul>
       <div class="d-flex">
-        <button class="btn btn-light me-2" role="button" (click)="openCart()">
+        <button class="btn btn-light me-2 position-relative" role="button" (click)="openCart()">
           <fa-icon [icon]="faBasketShopping" /> Winkelmand
+          @if (cartItemCount() > 0) {
+            <!-- position-absolute top-0 start-100 translate-middle-->
+            <span class=" badge rounded-pill bg-danger">
+              {{ cartItemCount() }}
+            </span>
+          }
         </button>
         <div ngbDropdown class="nav-item">
           <button ngbDropdownToggle class="btn btn-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">

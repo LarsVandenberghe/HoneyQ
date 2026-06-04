@@ -4,10 +4,11 @@ import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from './shared/header/header.component';
 import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './shared/toast-container/toast-container.component';
+import { CartOverviewComponent } from './cart/component/cart-overview/cart-overview.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderComponent, ToastsContainer],
+  imports: [RouterOutlet, HeaderComponent, CartOverviewComponent, ToastsContainer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

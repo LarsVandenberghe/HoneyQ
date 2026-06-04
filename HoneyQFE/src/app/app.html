@@ -9,14 +9,5 @@
 <app-toasts></app-toasts>
 
 <ng-template #cart let-offcanvas>
-	<div class="offcanvas-header">
-		<h4 class="offcanvas-title">Winkelmand</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
-	</div>
-	<div class="offcanvas-body">
-		<p>One fine body&hellip;</p>
-		<div class="text-end">
-			<button type="button" class="btn btn-outline-secondary" (click)="offcanvas.close('Close click')">Close</button>
-		</div>
-	</div>
+	<app-cart-overview (onClose)="offcanvas.close($event)"></app-cart-overview>
 </ng-template>

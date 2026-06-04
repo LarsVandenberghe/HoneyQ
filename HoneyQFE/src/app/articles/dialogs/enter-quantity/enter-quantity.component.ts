@@ -3,7 +3,7 @@ import { ModalDismissReasons, NgbActiveModal, NgbModule } from "@ng-bootstrap/ng
 import { DecimalPipe } from "@angular/common";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IArticle } from "../../services/article.service";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faBasketShopping, faCheck, faClose, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FormsModule } from "@angular/forms";
 import { IOrder } from "../../services/cart.service";
 
@@ -17,13 +17,16 @@ export enum EnterQuantityResponses {
     templateUrl: './enter-quantity.component.html',
     styleUrl: './enter-quantity.component.scss',
     changeDetection: ChangeDetectionStrategy.OnPush,
-}) export class EnterQuantityComponent implements OnInit{
+}) export class EnterQuantityComponent implements OnInit {
     modal = inject(NgbActiveModal);
     article = signal<IArticle | undefined>(undefined);
     currentCart = signal<IOrder | undefined>(undefined);
 
     faPlus = faPlus
     faMinus = faMinus
+    faBasketShopping = faBasketShopping;
+    faCheck = faCheck;
+    faClose = faClose;
 
     enterQuantityResponses = EnterQuantityResponses;
     modalDismissReasons = ModalDismissReasons;
@@ -41,7 +44,7 @@ export enum EnterQuantityResponses {
         const currentArticle = this.article();
         if (!currentArticle)
             return 0;
-        return 100 - ((currentArticle.reservedStock  + this.amount()) * 100 / currentArticle.amountOfStock)
+        return 100 - ((currentArticle.reservedStock + this.amount()) * 100 / currentArticle.amountOfStock)
     });
     availableStockLabel = computed(() => {
         const currentArticle = this.article();
@@ -79,7 +82,7 @@ export enum EnterQuantityResponses {
         } else if (amount < 0) {
             this.amount.set(0);
         } else {
-             this.amount.set(amount);
+            this.amount.set(amount);
         }
     }
 }

@@ -49,7 +49,13 @@
 
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-outline-danger" (click)="modal.dismiss(modalDismissReasons.ESC)">Annuleren</button>
-	<button type="button" class="btn btn-outline-secondary" (click)="modal.close({response: enterQuantityResponses.ADD, value: amount()})">Toevoegen</button>
-	<button type="button" class="btn btn-primary" (click)="modal.close({response: enterQuantityResponses.ADD_AND_GO_TO_CART, value: amount()})">Naar winkelmand</button>
+	<button type="button" class="btn btn-outline-danger" (click)="modal.dismiss(modalDismissReasons.ESC)">
+		<fa-icon [icon]="faClose" /> Annuleren
+	</button>
+	<button type="button" class="btn btn-outline-secondary" (click)="modal.close({response: enterQuantityResponses.ADD, value: amount()})">
+		<fa-icon [icon]="faCheck" /> Toepassen
+	</button>
+	<button type="button" class="btn btn-primary" (click)="modal.close({response: enterQuantityResponses.ADD_AND_GO_TO_CART, value: amount()})">
+		<fa-icon [icon]="faBasketShopping" /> Naar winkelmand
+	</button>
 </div>

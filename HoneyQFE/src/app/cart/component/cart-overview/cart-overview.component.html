@@ -1,0 +1,27 @@
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title">Winkelmand</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onClose.emit('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body d-flex flex-column">
+		@if (cartItemCount() > 0) {
+			<div class="flex-grow-1 d-flex flex-column gap-2">
+				@if(currentCart(); as cart){
+					@for (orderDetail of cart.orderDetails; track orderDetail.id) {
+						<app-cart-item [orderDetail]="orderDetail"></app-cart-item>
+					}
+				}
+			</div>
+			<hr>
+			<p>De totale prijs van je winkelmand is: <b>€ {{totalPriceCalculation() | number:'1.2-2':'nl-BE' }}</b></p>
+
+			<div class="text-end d-flex gap-2">
+				<button type="button" class="btn btn-outline-danger" (click)="removeCart()"><fa-icon [icon]="faTrashCan" /> Alles verwijderen</button>
+				<button type="button" class="btn btn-primary" (click)="orderCart()"><fa-icon [icon]="faDolly" /> Reserveren</button>
+			</div>
+		} @else {
+			<div class="d-flex flex-column align-items-center">
+				<fa-icon [icon]="faQuestion" style="font-size: x-large;" class="pb-4"/>
+				<p>Er zitten nog geen items in je winkelmand.</p>
+			</div>
+		}
+	</div>

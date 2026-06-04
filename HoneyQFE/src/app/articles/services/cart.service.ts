@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { computed, inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { IArticle } from "./article.service";
+import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 
 @Injectable({
     providedIn: 'root',
@@ -24,12 +25,13 @@ class CartService {
 })
 export class EnhancedCartService {
     #cartService = inject(CartService);
+    #offcanvasService = inject(NgbOffcanvas);
 
     currentOrders: WritableSignal<null | IOrder[]> = signal(null);
     currentCart = computed(() => {
         const cartOrders = this.currentOrders();
         if (cartOrders?.length === 1) {
-            return {...cartOrders[0]};
+            return { ...cartOrders[0] };
         }
         return undefined;
     })
@@ -38,20 +40,29 @@ export class EnhancedCartService {
         this.#cartService.findByUser().subscribe(orders => this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART)));
     }
 
-     addOrUpdateItem(id: number, amount: number): Observable<IOrder> {
+    addOrUpdateItem(id: number, amount: number): Observable<IOrder> {
         return this.#cartService.addOrUpdateItem(id, amount).pipe(
             tap(cart => {
                 this.currentOrders.update(orders => {
                     if (orders) {
                         const index = orders.findIndex(o => o.id === cart.id);
-                        orders[index] = cart;
+                        if (index === -1){
+                            orders.push(cart);
+                        } else {
+                            orders[index] = cart;
+                        }
+
                         return [...orders];
                     }
                     return orders;
                 })
             })
         );
-     }
+    }
+
+    openCart(): void {
+        // this.#offcanvasService.open()
+    }
 }
 
 export interface IOrder {

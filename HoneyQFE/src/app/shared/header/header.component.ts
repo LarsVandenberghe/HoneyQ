@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { faArrowRightFromBracket, faBasketShopping, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EnhancedCartService } from '../../articles/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +16,8 @@ export class HeaderComponent {
   onOpenCart = output<void>();
   profile = input<any>();
 
+  #cartService = inject(EnhancedCartService);
+
   profileName = computed(() => {
     let profile = this.profile();
     if (!profile || !profile?.email){
@@ -27,6 +30,8 @@ export class HeaderComponent {
     }
     return name;
   })
+
+  cartItemCount = computed(() => this.#cartService.currentCart()?.orderDetails?.length ?? 0);
 
   faArrowRightFromBracket = faArrowRightFromBracket
   faUser = faUser
