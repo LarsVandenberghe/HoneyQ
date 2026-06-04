@@ -1,10 +1,10 @@
-import { Component, inject, signal, TemplateRef } from '@angular/core';
+import { AfterViewInit, Component, inject, signal, TemplateRef, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from './shared/header/header.component';
-import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './shared/toast-container/toast-container.component';
 import { CartOverviewComponent } from './cart/component/cart-overview/cart-overview.component';
+import { EnhancedCartService } from './articles/services/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +12,25 @@ import { CartOverviewComponent } from './cart/component/cart-overview/cart-overv
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
+export class App implements AfterViewInit {
+  @ViewChild('cart') cartTemplate!: TemplateRef<any>;
+
   #authService = inject(AuthService);
-  #offcanvasService = inject(NgbOffcanvas);
+  #cartService = inject(EnhancedCartService);
 
   protected readonly title = signal('HoneyQFE');
   validToken = this.#authService.validToken;
   profile = this.#authService.profile;
 
+  ngAfterViewInit(): void {
+    this.#cartService.registerCartTemplate(this.cartTemplate);
+  }
+
   logout(): void {
     this.#authService.logout();
   }
 
-  openCart(content: TemplateRef<any>): void {
-    this.#offcanvasService.open(content, { position: 'end' });
+  openCart(): void {
+    this.#cartService.openCart();
   }
 }

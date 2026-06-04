@@ -26,6 +26,7 @@ class CartService {
 export class EnhancedCartService {
     #cartService = inject(CartService);
     #offcanvasService = inject(NgbOffcanvas);
+    #cartTemplate: TemplateRef<any> | null = null;
 
     currentOrders: WritableSignal<null | IOrder[]> = signal(null);
     currentCart = computed(() => {
@@ -60,8 +61,14 @@ export class EnhancedCartService {
         );
     }
 
-  openCart(content: TemplateRef<any>): void {
-    this.#offcanvasService.open(content, { position: 'end' });
+  registerCartTemplate(template: TemplateRef<any>): void {
+    this.#cartTemplate = template;
+  }
+
+  openCart(): void {
+    if (this.#cartTemplate) {
+      this.#offcanvasService.open(this.#cartTemplate, { position: 'end' });
+    }
   }
 }
 
