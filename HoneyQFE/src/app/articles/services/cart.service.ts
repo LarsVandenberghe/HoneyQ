@@ -1,8 +1,9 @@
 import { HttpClient } from "@angular/common/http";
-import { computed, inject, Injectable, signal, TemplateRef, WritableSignal } from "@angular/core";
+import { computed, effect, inject, Injectable, signal, TemplateRef, WritableSignal } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { IArticle } from "./article.service";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
+import { AuthService } from "../../core/services/auth.service";
 
 @Injectable({
     providedIn: 'root',
@@ -27,6 +28,7 @@ export class EnhancedCartService {
     #cartService = inject(CartService);
     #offcanvasService = inject(NgbOffcanvas);
     #cartTemplate: TemplateRef<any> | null = null;
+    #authService = inject(AuthService)
 
     currentOrders: WritableSignal<null | IOrder[]> = signal(null);
     currentCart = computed(() => {
@@ -37,9 +39,15 @@ export class EnhancedCartService {
         return undefined;
     })
 
-    constructor() {
-        this.#cartService.findByUser().subscribe(orders => this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART)));
-    }
+    authEffectRef = effect(() => {
+        const tokenValid = this.#authService.validToken();
+        if (tokenValid) {
+            this.#cartService.findByUser().pipe(tap((orders) => {
+                this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART));
+                this.authEffectRef.destroy();
+            })).subscribe();
+        }
+    })
 
     addOrUpdateItem(id: number, amount: number): Observable<IOrder> {
         return this.#cartService.addOrUpdateItem(id, amount).pipe(
