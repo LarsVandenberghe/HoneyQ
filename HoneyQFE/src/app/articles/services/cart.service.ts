@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { computed, inject, Injectable, signal, WritableSignal } from "@angular/core";
+import { computed, inject, Injectable, signal, TemplateRef, WritableSignal } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { IArticle } from "./article.service";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
@@ -60,9 +60,9 @@ export class EnhancedCartService {
         );
     }
 
-    openCart(): void {
-        // this.#offcanvasService.open()
-    }
+  openCart(content: TemplateRef<any>): void {
+    this.#offcanvasService.open(content, { position: 'end' });
+  }
 }
 
 export interface IOrder {

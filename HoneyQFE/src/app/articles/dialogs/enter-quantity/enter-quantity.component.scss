@@ -8,3 +8,14 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+
+.article-image{
+  max-width: 250px;
+}
+
+@media (max-width: 576px) {
+  .article-image{
+    max-width: 100px;
+  }
+}
