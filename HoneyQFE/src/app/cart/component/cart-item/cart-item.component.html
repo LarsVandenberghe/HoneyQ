@@ -2,12 +2,11 @@
 	
   <div class="card-body d-flex">
 	<div class="d-flex justify-content-center align-items-center">
-		<img [src]="orderDetail().article.imageUrl" class="m-3" style="max-width: 100px;" alt="...">
+		<img [src]="orderDetail().article.imageUrl" class="m-3" style="max-width: 80px;" alt="...">
 	</div>
 	<div>
 		<h5 class="card-title">{{orderDetail().article.name}}</h5>
 		<h6 class="card-subtitle mb-2 text-muted">€ {{(orderDetail().article.priceInEUR * orderDetail().quantity) | number:'1.2-2':'nl-BE' }}</h6>
-		<h6>Aantal ({{availableStockLabel()}})</h6>
 		<div class="d-flex gap-2 flex-wrap flex-sm-nowrap">
 			<div class="input-group">
 				<button class="btn btn-outline-primary" (click)="onAmountChange(amount() - 1)" type="button"><fa-icon [icon]="faMinus" /></button>
@@ -22,7 +21,7 @@
 			</div>
 			<button class="btn btn-outline-danger" ><fa-icon [icon]="faTrashCan" /></button>
 		</div>
-
+		<p>Beschikbaar ({{availableStockLabel()}})</p>
 	</div>
   </div>
 </div>
