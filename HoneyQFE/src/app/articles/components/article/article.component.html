@@ -5,7 +5,7 @@
 
     <div class="card-body">
         <h5 class="card-title">{{article().name}}</h5>
-        <p class="card-text" [innerHTML]="article().description"></p>
+        <p class="card-text" style="height: 170px; overflow: auto;" [innerHTML]="article().description"></p>
         <p class="card-text" style="font-weight: bolder; font-size: 1.6rem">€ {{article().priceInEUR | number:'1.2-2':'nl-BE'}}</p>
         <h6>Voorraad</h6>
         <ngb-progressbar class="mb-3" type="secondary" [value]="availableStock()" [striped]="true" [animated]="true"

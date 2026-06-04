@@ -60,7 +60,6 @@ public class OrderService {
             cart.getOrderDetails().remove(articleAlreadyInDetail.get());
             cart = orderRepository.save(cart);
             orderDetailRepository.delete(articleAlreadyInDetail.get());
-            // TODO LVA look into cascading types => for some reason when the orderDetail is being removed the  Order itself is also gone!
             return cart;
         } else if (amount > 0) {
             orderDetail = new OrderDetail(article, cart, amount);

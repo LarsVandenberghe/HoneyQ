@@ -2,7 +2,6 @@ package be.honeyq.HoneyQBE.model;
 
 import java.util.UUID;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,11 +19,11 @@ public class OrderDetail {
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name="article_id", nullable=false, referencedColumnName = "id")
   private Article article;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne
   @JoinColumn(name="order_id", nullable=false, referencedColumnName = "id")
   private Order order;
 

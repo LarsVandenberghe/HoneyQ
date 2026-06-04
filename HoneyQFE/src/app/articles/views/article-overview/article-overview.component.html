@@ -1,5 +1,5 @@
 
-<div class="d-flex" style="gap: 2rem; margin: 10px">
+<div class="d-flex flex-wrap justify-content-center" style="gap: 2rem; margin: 10px">
     @if (articles(); as articles) {
         @if (currentOrders(); as currentOrders){
             @for (article of articles; track article.id) {
