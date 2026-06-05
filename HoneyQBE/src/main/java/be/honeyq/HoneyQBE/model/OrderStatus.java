@@ -3,5 +3,8 @@ package be.honeyq.HoneyQBE.model;
 public enum OrderStatus {
   CART,
   SENT,
-  PAID
+  PAID,
+  RECEIVED,
+  PAID_AND_RECEIVED,
+  CANCELLED
 }

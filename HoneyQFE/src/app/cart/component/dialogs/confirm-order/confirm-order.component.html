@@ -1,0 +1,17 @@
+<div class="modal-header">
+	<h4 class="modal-title" id="modal-basic-title">Reserveren</h4>
+	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body">
+	<p>Ben je zeker dat je deze items voor een totaal bedrag van <b>€ {{ totalPrice() | number:'1.2-2':'nl-BE'}}</b> wil reserveren?</p>
+	<p>Na reserveren komen de producten jouw kant op. Wij nemen contact met je op voor verdere afhandeling. Je kan dit cash (of met qr code) betalen bij de persoon die je de producten overhandigd.</p>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-outline-danger" (click)="modal.dismiss(modalDismissReasons.ESC)">
+		<fa-icon [icon]="faClose" /> Annuleren
+	</button>
+	<button type="button" class="btn btn-primary" (click)="modal.close(true)">
+		<fa-icon [icon]="faCheck" /> Reserveren
+	</button>
+</div>

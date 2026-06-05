@@ -35,7 +35,7 @@ export enum EnterQuantityResponses {
         source: () => {
             const currentCart = this.currentCart();
             const article = this.article();
-            return currentCart?.orderDetails?.find(od => od.article.id === article?.id)?.quantity ?? 0;
+            return currentCart?.orderDetails?.find(od => od.article.id === article?.id)?.quantity ?? 1;
         },
         computation: (source) => source
     });

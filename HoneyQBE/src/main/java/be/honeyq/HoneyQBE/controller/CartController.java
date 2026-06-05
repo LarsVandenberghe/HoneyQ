@@ -1,10 +1,10 @@
 package be.honeyq.HoneyQBE.controller;
 
 import java.util.List;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("cart")
-@CrossOrigin
 public class CartController {
     
     @Autowired
@@ -47,8 +46,41 @@ public class CartController {
 		var user = userRepository.findById(userId).get();
 
 		try {
-			var order = orderService.addItemToCart(user, id, amount);
+			var order = orderService.addOrUpdateItemToCart(user, id, amount);
 			return SimpleOrderDto.fromDomain(order);
+		} catch (IllegalArgumentException e) {
+			var reason = e.getMessage();
+			throw new ResponseStatusException(
+				HttpStatus.BAD_REQUEST,
+				reason
+			);
+		}
+	}
+
+	@PostMapping("remove-items-from-cart/{id}")
+	public SimpleOrderDto removeItemsFromMyCart(@PathVariable UUID id) {
+        var userId = UserContextHelper.getUserUUID();
+		var user = userRepository.findById(userId).get();
+
+		try {
+			var order = orderService.removeItemsFromMyCart(user, id);
+			return SimpleOrderDto.fromDomain(order);
+		} catch (IllegalArgumentException e) {
+			var reason = e.getMessage();
+			throw new ResponseStatusException(
+				HttpStatus.BAD_REQUEST,
+				reason
+			);
+		}
+	}
+
+	@PostMapping("make-order-from-cart/{id}")
+	public void makeOrderFromMyCart(@PathVariable UUID id) {
+        var userId = UserContextHelper.getUserUUID();
+		var user = userRepository.findById(userId).get();
+
+		try {
+			orderService.makeOrderFromMyCart(user, id);
 		} catch (IllegalArgumentException e) {
 			var reason = e.getMessage();
 			throw new ResponseStatusException(

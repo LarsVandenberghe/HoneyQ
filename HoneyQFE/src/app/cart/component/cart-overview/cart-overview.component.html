@@ -6,8 +6,8 @@
 		@if (cartItemCount() > 0) {
 			<div class="flex-grow-1 d-flex flex-column gap-2">
 				@if(currentCart(); as cart){
-					@for (orderDetail of cart.orderDetails; track orderDetail.id) {
-						<app-cart-item [orderDetail]="orderDetail"></app-cart-item>
+					@for (orderDetail of sortedOrderDetails(); track orderDetail.id) {
+						<app-cart-item [orderDetail]="orderDetail" (onAmountChange)="articleAmountUpdate(orderDetail, $event)"></app-cart-item>
 					}
 				}
 			</div>

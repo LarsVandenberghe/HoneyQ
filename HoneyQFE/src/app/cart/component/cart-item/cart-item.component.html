@@ -9,7 +9,7 @@
 		<h6 class="card-subtitle mb-2 text-muted">€ {{(orderDetail().article.priceInEUR * orderDetail().quantity) | number:'1.2-2':'nl-BE' }}</h6>
 		<div class="d-flex gap-2 flex-wrap flex-sm-nowrap">
 			<div class="input-group">
-				<button class="btn btn-outline-primary" (click)="onAmountChange(amount() - 1)" type="button"><fa-icon [icon]="faMinus" /></button>
+				<button class="btn btn-outline-primary" (click)="amountChange(amount() - 1)" type="button"><fa-icon [icon]="faMinus" /></button>
 				<input
 					type="number"
 					class="form-control"
@@ -17,9 +17,9 @@
 					[disabled]="true"
 					[ngModelOptions]="{standalone: true}"
 				/>
-				<button class="btn btn-outline-primary" (click)="onAmountChange(amount() + 1)" type="button"><fa-icon [icon]="faPlus" /></button>
+				<button class="btn btn-outline-primary" (click)="amountChange(amount() + 1)" type="button"><fa-icon [icon]="faPlus" /></button>
 			</div>
-			<button class="btn btn-outline-danger" ><fa-icon [icon]="faTrashCan" /></button>
+			<button class="btn btn-outline-danger" (click)="onAmountChange.emit(0)"><fa-icon [icon]="faTrashCan" /></button>
 		</div>
 		<p>Beschikbaar ({{availableStockLabel()}})</p>
 	</div>

@@ -2,8 +2,10 @@ package be.honeyq.HoneyQBE.model;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -22,15 +24,21 @@ public class Article {
     private Boolean isBulk = false;
     private Double priceInEUR;
 
-    @Column(
-		nullable = true
-	)
+    @Column(nullable = true)
     private String imageUrl;
 
-    @OneToMany(mappedBy="article")
+    @OneToMany(
+        mappedBy="article",
+        cascade = CascadeType.REFRESH,
+        fetch = FetchType.EAGER
+    )
     private Set<Stock> stock;
 
-    @OneToMany(mappedBy="article")
+    @OneToMany(
+        mappedBy="article",
+        cascade = CascadeType.REFRESH,
+        fetch = FetchType.EAGER
+    )
     private Set<OrderDetail> orderDetail;
 
     Article(){}

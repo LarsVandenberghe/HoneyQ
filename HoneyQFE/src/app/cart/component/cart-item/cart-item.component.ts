@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, OnInit, output } from '@angular/core';
 import { IOrderDetail } from '../../../articles/services/cart.service';
 import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -26,6 +26,8 @@ export class CartItemComponent implements OnInit {
     computation: (source) => source
   });
 
+  onAmountChange = output<number>();
+
   availableStockLabel = computed(() => {
     const currentArticle = this.orderDetail().article;
     if (!currentArticle)
@@ -42,10 +44,10 @@ export class CartItemComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.onAmountChange(this.amount());
+    this.amountChange(this.amount());
   }
 
-  onAmountChange(amount: number): void {
+  amountChange(amount: number): void {
     const maximumAllowed = this.maximumStockAllowed();
     if (amount > maximumAllowed) {
       this.amount.set(maximumAllowed);
@@ -54,5 +56,7 @@ export class CartItemComponent implements OnInit {
     } else {
       this.amount.set(amount);
     }
+
+    this.onAmountChange.emit(this.amount());
   }
 }

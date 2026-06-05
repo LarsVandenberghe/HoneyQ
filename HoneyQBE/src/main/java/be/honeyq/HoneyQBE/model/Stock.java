@@ -1,6 +1,5 @@
 package be.honeyq.HoneyQBE.model;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,7 +15,7 @@ public class Stock {
   @GeneratedValue
   private Long id;
   
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne()
   @JoinColumn(name="article_id", nullable=false, referencedColumnName = "id")
   private Article article;
 

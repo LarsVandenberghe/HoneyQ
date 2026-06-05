@@ -5,8 +5,10 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -19,17 +21,17 @@ public class User {
 
     private String emailAddress;
 
-    @Column(
-		nullable = true
-	)
+    @Column(nullable = true)
     private String firstName;
 
-    @Column(
-		nullable = true
-	)
+    @Column(nullable = true)
     private String lastName;
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(
+        mappedBy="user",
+        cascade = CascadeType.REFRESH,
+        fetch = FetchType.EAGER
+    )
     private Set<Order> orders;
 
     public User(String emailAddress, String firstName, String lastName) {

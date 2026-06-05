@@ -2,7 +2,10 @@ package be.honeyq.HoneyQBE.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,12 +30,16 @@ public class OrderService {
     @Autowired
     private OrderDetailRepository orderDetailRepository;
 
-    public Order addItemToCart(User user, Long itemNr, Double amount) {
+    public Order addOrUpdateItemToCart(User user, Long articleId, Double amount) {
         var orders = this.orderRepository.findByUser(user);
         var currentCart = orders.stream().filter(o -> o.getStatus() == OrderStatus.CART).findFirst();
 
-        var article = articleRepository.getReferenceById(itemNr);
+        var article = articleRepository.getReferenceById(articleId);
         var available = getAvailable(article);
+
+        if (amount < 0){
+            throw new IllegalArgumentException("Geen negatieve stock toegestaan.");
+        }
 
         if (amount > 0 && available < amount){
             throw new IllegalArgumentException("Niet genoeg stock beschikbaar. Refresh je pagina en probeer opnieuw.");
@@ -47,7 +54,7 @@ public class OrderService {
         }
         
         var curentDetails = new ArrayList<>(cart.getOrderDetails());
-        var articleAlreadyInDetail = curentDetails.stream().filter(cd -> cd.getArticle().getId() == itemNr).findFirst();
+        var articleAlreadyInDetail = curentDetails.stream().filter(cd -> cd.getArticle().getId() == articleId).findFirst();
 
         OrderDetail orderDetail = null;
         if (articleAlreadyInDetail.isPresent() && amount > 0) {
@@ -57,9 +64,10 @@ public class OrderService {
             return orderRepository.getReferenceById(cart.getId());
 
         } else if (articleAlreadyInDetail.isPresent() && amount <= 0) {
+            var orderDetailId = articleAlreadyInDetail.get().getId();
             cart.getOrderDetails().remove(articleAlreadyInDetail.get());
             cart = orderRepository.save(cart);
-            orderDetailRepository.delete(articleAlreadyInDetail.get());
+            orderDetailRepository.deleteById(orderDetailId);;
             return cart;
         } else if (amount > 0) {
             orderDetail = new OrderDetail(article, cart, amount);
@@ -68,6 +76,43 @@ public class OrderService {
             return orderRepository.save(cart);
         }
         return orderRepository.getReferenceById(cart.getId());
+    }
+
+    public Order removeItemsFromMyCart(User user, UUID cartID) {
+        var cart = this.orderRepository.getReferenceById(cartID);
+        
+        if (!cart.getUser().getId().equals(user.getId())) {
+            throw new IllegalArgumentException("Je kan de winkelmand van een andere gebruiker niet wijzigen!");
+        }
+        if (!cart.getStatus().equals(OrderStatus.CART)) {
+            throw new IllegalArgumentException("Je kan deze winkelmand niet meer wijzigen!");
+        }
+        
+        var currentDetails = cart.getOrderDetails();
+        var currentDetailIds = currentDetails.stream().map(cd -> cd.getId()).toList();
+        cart.getOrderDetails().removeAll(currentDetails);
+        cart = orderRepository.save(cart);
+
+        orderDetailRepository.deleteAllById(currentDetailIds);
+
+        return cart;
+    }
+
+    public void makeOrderFromMyCart(User user, UUID cartID) {
+        var cart = this.orderRepository.getReferenceById(cartID);
+
+        if (!cart.getUser().getId().equals(user.getId())) {
+            throw new IllegalArgumentException("Kan kan de winkelmand van een andere gebruiker niet wijzigen!");
+        }
+        if (!cart.getStatus().equals(OrderStatus.CART)) {
+            throw new IllegalArgumentException("Je kan deze winkelmand niet meer wijzigen!");
+        }
+
+        cart.setSentDate(new Date());
+        cart.setStatus(OrderStatus.SENT);
+        cart = orderRepository.save(cart);
+        cart.getOrderDetails().stream().forEach(od -> od.setArticlePriceAfterOrdering(od.getArticle().getPriceInEUR()));
+        orderDetailRepository.saveAll(cart.getOrderDetails());
     }
 
     private Double getAvailable(Article article) {

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { computed, effect, inject, Injectable, signal, TemplateRef, WritableSignal } from "@angular/core";
-import { Observable, tap } from "rxjs";
+import { map, Observable, switchMap, tap } from "rxjs";
 import { IArticle } from "./article.service";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../core/services/auth.service";
@@ -16,8 +16,16 @@ class CartService {
         return this.#httpClient.get<IOrder[]>(this.#url + "cart");
     }
 
-    addOrUpdateItem(id: number, amount: number): Observable<IOrder> {
-        return this.#httpClient.post<IOrder>(this.#url + `cart/add-or-update-item/${id}/${amount}`, undefined);
+    addOrUpdateItem(articleId: number, amount: number): Observable<IOrder> {
+        return this.#httpClient.post<IOrder>(this.#url + `cart/add-or-update-item/${articleId}/${amount}`, undefined);
+    }
+
+    removeItems(cartId: string): Observable<IOrder> {
+        return this.#httpClient.post<IOrder>(this.#url + `cart/remove-items-from-cart/${cartId}`, undefined);
+    }
+
+    makeOrderFromMyCart(cartId: string): Observable<IOrder> {
+        return this.#httpClient.post<IOrder>(this.#url + `cart/make-order-from-cart/${cartId}`, undefined);
     }
 }
 
@@ -27,8 +35,8 @@ class CartService {
 export class EnhancedCartService {
     #cartService = inject(CartService);
     #offcanvasService = inject(NgbOffcanvas);
-    #cartTemplate: TemplateRef<any> | null = null;
-    #authService = inject(AuthService)
+    #cartOffCanvasTemplate: TemplateRef<any> | null = null;
+    #authService = inject(AuthService);
 
     currentOrders: WritableSignal<null | IOrder[]> = signal(null);
     currentCart = computed(() => {
@@ -42,42 +50,59 @@ export class EnhancedCartService {
     authEffectRef = effect(() => {
         const tokenValid = this.#authService.validToken();
         if (tokenValid) {
-            this.#cartService.findByUser().pipe(tap((orders) => {
-                this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART));
-                this.authEffectRef.destroy();
-            })).subscribe();
+            this.#cartService.findByUser().pipe(
+                tap(orders => {
+                    this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART));
+                    this.authEffectRef.destroy();
+                })
+            ).subscribe();
         }
     })
 
-    addOrUpdateItem(id: number, amount: number): Observable<IOrder> {
-        return this.#cartService.addOrUpdateItem(id, amount).pipe(
-            tap(cart => {
-                this.currentOrders.update(orders => {
-                    if (orders) {
-                        const index = orders.findIndex(o => o.id === cart.id);
-                        if (index === -1){
-                            orders.push(cart);
-                        } else {
-                            orders[index] = cart;
-                        }
-
-                        return [...orders];
-                    }
-                    return orders;
-                })
-            })
+    addOrUpdateItem(articleId: number, amount: number): Observable<IOrder> {
+        return this.#cartService.addOrUpdateItem(articleId, amount).pipe(
+            tap((cart) => this.#updateCartPostCall(cart))
         );
     }
 
-  registerCartTemplate(template: TemplateRef<any>): void {
-    this.#cartTemplate = template;
-  }
-
-  openCart(): void {
-    if (this.#cartTemplate) {
-      this.#offcanvasService.open(this.#cartTemplate, { position: 'end' });
+    removeItems(cartId: string): Observable<IOrder> {
+        return this.#cartService.removeItems(cartId).pipe(
+            tap((cart) => this.#updateCartPostCall(cart))
+        );
     }
-  }
+
+    makeOrderFromMyCart(cartId: string): Observable<void> {
+        return this.#cartService.makeOrderFromMyCart(cartId).pipe(
+            switchMap(() => this.#cartService.findByUser()),
+            map(orders => this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART)))
+        );
+    }
+
+    registerCartOffCanvasTemplate(template: TemplateRef<any>): void {
+        this.#cartOffCanvasTemplate = template;
+    }
+
+    openCartOffCanvas(): void {
+        if (this.#cartOffCanvasTemplate) {
+            this.#offcanvasService.open(this.#cartOffCanvasTemplate, { position: 'end' });
+        }
+    }
+
+    #updateCartPostCall(cart: IOrder): void {
+        this.currentOrders.update(orders => {
+            if (orders) {
+                const index = orders.findIndex(o => o.id === cart.id);
+                if (index === -1) {
+                    orders.push(cart);
+                } else {
+                    orders[index] = cart;
+                }
+
+                return [...orders].sort();
+            }
+            return orders;
+        })
+    }
 }
 
 export interface IOrder {
@@ -89,7 +114,10 @@ export interface IOrder {
 export enum OrderStatus {
     CART = "CART",
     SENT = "SENT",
-    PAID = "PAID"
+    PAID = "PAID",
+    RECEIVED = "RECEIVED",
+    PAID_AND_RECEIVED = "PAID_AND_RECEIVED",
+    CANCELLED = "CANCELLED"
 }
 
 export interface IOrderDetail {

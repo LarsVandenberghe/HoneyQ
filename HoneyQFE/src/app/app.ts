@@ -23,7 +23,7 @@ export class App implements AfterViewInit {
   profile = this.#authService.profile;
 
   ngAfterViewInit(): void {
-    this.#cartService.registerCartTemplate(this.cartTemplate);
+    this.#cartService.registerCartOffCanvasTemplate(this.cartTemplate);
   }
 
   logout(): void {
@@ -31,6 +31,6 @@ export class App implements AfterViewInit {
   }
 
   openCart(): void {
-    this.#cartService.openCart();
+    this.#cartService.openCartOffCanvas();
   }
 }
