@@ -1,5 +1,5 @@
 ## Making a docker container
-1) ./mvnw package
+1) ./mvnw package "-Dmaven.test.skip"
 2) docker build -t honeyqbe .
 3) docker save -o honeyqbe.tar.gz honeyqbe
 4) copy to the host machine
@@ -28,6 +28,9 @@ docker run --name keycloak -p 8081:8080 -e KC_BOOTSTRAP_ADMIN_USERNAME=admin -e 
 
 
 ### Keycloak
+realm theme command update:
+sudo docker cp /home/lars/keycloak-theme-for-kc-all-other-versions.jar keycloak:/opt/keycloak/providers/keycloak-theme-for-kc-all-other-versions.jar
+
 Add a realm, new client with guid client ID
 
 realm settings => User registration, remember me, Email as username, etc

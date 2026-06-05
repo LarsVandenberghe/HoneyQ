@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { OAuthStorage } from 'angular-oauth2-oidc';
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 
 export function oauthInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Observable<HttpEvent<any>> {
@@ -23,5 +24,5 @@ export function oauthInterceptor(req: HttpRequest<any>, next: HttpHandlerFn): Ob
 
     
 function checkUrl(url: string): boolean {
-    return url.startsWith("http://localhost:8080");
+    return url.startsWith(environment.api);
 }

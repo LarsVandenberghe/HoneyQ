@@ -4,13 +4,14 @@ import { map, Observable, switchMap, tap } from "rxjs";
 import { IArticle } from "./article.service";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../core/services/auth.service";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root',
 })
 class CartService {
     #httpClient = inject(HttpClient);
-    #url = "http://localhost:8080/";
+    #url = `${environment.api}/`;
 
     findByUser(): Observable<IOrder[]> {
         return this.#httpClient.get<IOrder[]>(this.#url + "cart");

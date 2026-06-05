@@ -2,13 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { effect, inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { Observable, tap } from "rxjs";
 import { AuthService } from "../../core/services/auth.service";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
     providedIn: 'root',
 })
 export class ArticleService {
     #httpClient = inject(HttpClient);
-    #url = "http://localhost:8080/";
+    #url = `${environment.api}/`;
 
     getAll(): Observable<IArticle[]> {
         return this.#httpClient.get<IArticle[]>(this.#url + "article");

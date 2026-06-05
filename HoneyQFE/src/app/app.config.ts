@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthConfig, provideOAuthClient } from 'angular-oauth2-oidc';
 import { oauthInterceptor } from './core/interceptors/oauth.interceptor';
 import { errorInterceptor } from './core/interceptors/error.interceptor';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +19,7 @@ export const appConfig: ApplicationConfig = {
 };
 
 export const authConfig: AuthConfig = {
-  issuer: 'http://localhost:8081/realms/master',
+  issuer: environment.authServer,
   redirectUri: `${window.location.origin}/auth-redirect`,
   silentRefreshRedirectUri: `${window.location.origin}/silent-refresh`,
   postLogoutRedirectUri: window.location.origin,
