@@ -16,6 +16,8 @@ export class HeaderComponent {
   onOpenCart = output<void>();
   profile = input<any>();
 
+  isMenuCollapsed = true;
+
   #cartService = inject(EnhancedCartService);
 
   profileName = computed(() => {

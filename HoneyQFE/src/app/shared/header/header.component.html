@@ -1,32 +1,27 @@
 <nav class="navbar navbar-expand-lg gradient-custom">
   <div class="container-fluid">
     <a class="navbar-brand" style="color: white; font-family: system-ui, -apple-syst; font-weight: bolder" href="#">HoneyQ</a>
-    <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed"
+      aria-controls="navbarSupportedContent" [attr.aria-expanded]="!isMenuCollapsed" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> -->
-    <!-- class="collapse navbar-collapse" id="navbarSupportedContent" -->
-    <div class="navbar-collapse">
+    </button>
+    <div class="navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link text-black-50" aria-current="page" href="/articles">Artikels</a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li> -->
       </ul>
       <div class="d-flex">
         <button class="btn btn-light me-2 position-relative" role="button" (click)="openCart()">
           <fa-icon [icon]="faBasketShopping" /> Winkelmand
           @if (cartItemCount() > 0) {
-            <!-- position-absolute top-0 start-100 translate-middle-->
-            <span class=" badge rounded-pill bg-danger">
+            <span class="badge rounded-pill bg-danger">
               {{ cartItemCount() }}
             </span>
           }
         </button>
         <div ngbDropdown class="nav-item">
-          <button ngbDropdownToggle class="btn btn-light" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <button ngbDropdownToggle class="btn btn-light" role="button">
             <fa-icon [icon]="faUser" />
           </button>
           <ul ngbDropdownMenu class="dropdown-menu dropdown-menu-end">
