@@ -15,7 +15,6 @@ export class ArticleOverviewComponent {
   #articleService = inject(EnhancedArticleService);
   #cartService = inject(EnhancedCartService);
   articles = this.#articleService.articles;
-  currentOrders = this.#cartService.currentOrders;
   currentCart = this.#cartService.currentCart;
 
   addOrUpdateToBasket(event: AddToBaskedEvent): void {

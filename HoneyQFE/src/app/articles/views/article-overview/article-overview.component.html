@@ -1,10 +1,10 @@
 
 <div class="d-flex flex-wrap justify-content-center" style="gap: 2rem; margin: 10px">
     @if (articles(); as articles) {
-        @if (currentOrders(); as currentOrders){
-            @for (article of articles; track article.id) {
-                <app-article [article]="article" [currentCart]="currentCart()" (onAddToBasket)="addOrUpdateToBasket($event)"></app-article>
-            }
+        @for (article of articles; track article.id) {
+            <app-article [article]="article" [currentCart]="currentCart()" (onAddToBasket)="addOrUpdateToBasket($event)"></app-article>
+        } @empty {
+            <p>Er zijn geen artikels beschikbaar.</p>
         }
-    }
+    } 
 </div>

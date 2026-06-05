@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class WelcomeComponent {
   private authService = inject(AuthService);
+  currentYear = new Date().getFullYear();
 
   validToken = this.authService.validToken
   

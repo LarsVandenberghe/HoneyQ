@@ -8,7 +8,7 @@
                         <div class="col-xxl-5">
                             <!-- Header text content-->
                             <div class="text-center text-xxl-start">
-                                <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
+                                <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Hobby Imker &middot; Bestuiving &middot; Honing</div></div>
                                 <div class="fs-3 fw-light text-muted">Bestel hier je potje honing</div>
                                 <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">HoneyQ</span></h1>
                                 @if(!validToken()){
@@ -149,20 +149,161 @@
             <!-- About Section-->
             <section class="bg-light py-5">
                 <div class="container px-5">
-                    <div class="row gx-5 justify-content-center">
+
+                    <!-- Intro imker -->
+                    <div class="row gx-5 justify-content-center mb-5">
                         <div class="col-xxl-8">
                             <div class="text-center my-5">
-                                <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">About Me</span></h2>
-                                <p class="lead fw-light mb-4">My name is Start Bootstrap and I help brands grow.</p>
-                                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dolorum itaque qui unde quisquam consequatur autem. Eveniet quasi nobis aliquid cumque officiis sed rem iure ipsa! Praesentium ratione atque dolorem?</p>
-                                <div class="d-flex justify-content-center fs-2 gap-4">
-                                    <a class="text-gradient" href="#!"><i class="bi bi-twitter"></i></a>
-                                    <a class="text-gradient" href="#!"><i class="bi bi-linkedin"></i></a>
-                                    <a class="text-gradient" href="#!"><i class="bi bi-github"></i></a>
+                                <h2 class="display-5 fw-bolder"><span class="text-gradient d-inline">Over de imker</span></h2>
+                                <p class="lead fw-light mb-4">Passie voor bijen, respect voor de natuur.</p>
+                                <p class="text-muted">
+                                    In 2024 volgde ik een imkersopleiding. Nu beheer ik samen met mijn partner <strong>4 bijenkasten verspreid over 2 locaties</strong>.
+                                    Voor mij staat het welzijn van de bijen altijd op de eerste plaats. Ik oogst enkel de honing die de bijen
+                                    <em>écht over hebben</em> — het overschot dat ze zelf niet nodig hebben voor de winter.
+                                    Zo zorgen we samen voor een duurzame en eerlijke relatie tussen imker en bij.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Honingbijen -->
+                    <div class="row gx-5 align-items-center mb-5">
+                        <div class="col-lg-6">
+                            <h3 class="fw-bolder mb-3"><span class="text-gradient d-inline">De honingbij</span></h3>
+                            <p class="text-muted">
+                                De Westerse honingbij (<em>Apis mellifera</em>) is een sociaal insect dat leeft in kolonies van
+                                20.000 tot 80.000 individuen. Elke kolonie bestaat uit één koningin, duizenden werksters en
+                                een seizoensgebonden aantal darren (mannetjes).
+                            </p>
+                            <p class="text-muted">
+                                De <strong>koningin</strong> legt tot 2.000 eieren per dag en is de enige vruchtbare vrouwelijke bij in de kast.
+                                De <strong>werksters</strong> zijn onvruchtbare vrouwtjes die instaan voor het verzamelen van nectar en stuifmeel,
+                                het bewaken van de ingang, het voeden van de larven en het produceren van honing.
+                                <strong>Darren</strong> hebben als enige taak het bevruchten van een nieuwe koningin.
+                            </p>
+                            <p class="text-muted">
+                                Een bijenvolk communiceert via de beroemde <strong>bijendans</strong>: werksters dansen om de richting en
+                                afstand van een voedselbron aan te geven aan hun nestgenoten. Dit complexe communicatiesysteem
+                                werd in 1973 ontdekt door Karl von Frisch, waarvoor hij de Nobelprijs ontving.
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h5 class="fw-bolder text-gradient mb-3">Feiten over honingbijen</h5>
+                                <ul class="text-muted list-unstyled">
+                                    <li class="mb-2">🐝 Een werkster verzameld in haar leven <strong>7 gram honing</strong></li>
+                                    <li class="mb-2">🍯 Voor 1 kg honing legt een bij <strong>~150.000 km</strong> af</li>
+                                    <li class="mb-2">🌸 Een volk bestuift tot <strong>300 miljoen bloemen</strong> per seizoen</li>
+                                    <li class="mb-2">❄️ In de winter vormen ze een <strong>winterkluster</strong> om warm te blijven</li>
+                                    <li class="mb-2">📍 Bijen herkennen hun kast op basis van geur en positie</li>
+                                    <li class="mb-2">⏳ Een werkster leeft gemiddeld slechts <strong>6 weken</strong> in de zomer</li>
+                                    <li class="mb-2">👑 De koningin kan <strong>3 tot 5 jaar</strong> leven</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solitaire bijen -->
+                    <div class="row gx-5 mb-5">
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-4 p-4 bg-white">
+                                <h3 class="fw-bolder mb-3"><span class="text-gradient d-inline">Honingbijen vs. solitaire bijen</span></h3>
+                                <div class="row gx-5">
+                                    <div class="col-lg-6">
+                                        <h5 class="fw-bold mb-2">🍯 Honingbijen (sociaal)</h5>
+                                        <p class="text-muted">
+                                            Honingbijen leven in grote, georganiseerde kolonies met een duidelijke sociale structuur.
+                                            Ze bouwen wasraten, produceren honing als wintervoedsel en zwermen wanneer de kolonie te groot wordt.
+                                            Ze zijn gedomesticeerd en worden al duizenden jaren door mensen gehouden.
+                                            Honingbijen zijn territoriaal en zullen hun kast verdedigen met hun angel — de werkster sterft na het steken.
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <h5 class="fw-bold mb-2">🌿 Solitaire bijen</h5>
+                                        <p class="text-muted">
+                                            Meer dan 90% van alle bijensoorten wereldwijd zijn solitaire bijen. Denk aan de metselbij,
+                                            zandbij of behangersbij. Ze leven alleen: elke vrouwelijke bij maakt haar eigen nestje,
+                                            legt eieren en voorziet elke cel van stuifmeel en nectar als voedsel voor de larven.
+                                            Ze produceren geen honing en zijn doorgaans niet agressief. Solitaire bijen zijn
+                                            bijzonder efficiënte bestuivers — soms zelfs beter dan honingbijen.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row gx-5 mt-3">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered text-muted small">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Honingbij</th>
+                                                        <th>Solitaire bij</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr><td>Leefwijze</td><td>Kolonie (sociaal)</td><td>Alleen (solitair)</td></tr>
+                                                    <tr><td>Honingproductie</td><td>Ja ✅</td><td>Nee ❌</td></tr>
+                                                    <tr><td>Bestuiving</td><td>Goed</td><td>Uitstekend</td></tr>
+                                                    <tr><td>Agressiviteit</td><td>Kan steken ter verdediging</td><td>Zelden agressief</td></tr>
+                                                    <tr><td>Overwintering</td><td>Als kolonie in de kast</td><td>Als larve/pop in nestcel</td></tr>
+                                                    <tr><td>Aantal soorten (BE/NL)</td><td>1 soort</td><td>~350 soorten</td></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Bijproducten -->
+                    <div class="row gx-5 mb-5">
+                        <div class="col-12 text-center mb-4">
+                            <h3 class="fw-bolder"><span class="text-gradient d-inline">Bijproducten uit de kast</span></h3>
+                            <p class="text-muted lead fw-light">Wat de bijen ons cadeau doen — als ze het kunnen missen.</p>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
+                                <div class="fs-1 mb-2">🍯</div>
+                                <h4 class="fw-bolder mb-2">Honing</h4>
+                                <p class="text-muted">
+                                    Honing is ingedikt bloemennectar. Werksters verzamelen nectar, mengen deze met enzymen
+                                    uit hun speekselklieren en slaan ze op in de raat. Door het ventileren met hun vleugels
+                                    verdampt het water tot het vochtgehalte onder 20% zakt — pas dan wordt de cel verzegeld
+                                    met bijenwas. Honing bevat suikers, antioxidanten, enzymen en sporen van stuifmeel.
+                                    Het is de wintervoorraad van de bijen: wij nemen enkel het overschot.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
+                                <div class="fs-1 mb-2">🟤</div>
+                                <h4 class="fw-bolder mb-2">Propolis</h4>
+                                <p class="text-muted">
+                                    Propolis — ook wel bijenlijm of -kit — is een harsachtige substantie die bijen verzamelen
+                                    van knoppen en bast van bomen (zoals populier en kastanje). Ze mengen dit met bijenwas
+                                    en gebruiken het om kieren en spleten in de kast te dichten, indringers te mumificeren
+                                    en bacteriën en schimmels te weren. Propolis heeft van nature antibacteriële,
+                                    antivirale en antischimmel eigenschappen en wordt dan ook gebruikt in
+                                    cosmetica en volksgeneeskunde.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card border-0 shadow-sm rounded-4 h-100 p-4">
+                                <div class="fs-1 mb-2">🕯️</div>
+                                <h4 class="fw-bolder mb-2">Bijenwas</h4>
+                                <p class="text-muted">
+                                    Bijenwas wordt geproduceerd door jonge werksters via wasklieren op hun achterlichaam.
+                                    Ze gebruiken het om de honingraten te bouwen — de perfecte zeshoekige cellen die zowel
+                                    voor de opslag van honing als voor de opvoeding van larven dienen. Voor 1 kg bijenwas
+                                    verbruiken bijen ongeveer 6 kg honing. Bijenwas smelt bij ±63°C en wordt gebruikt voor
+                                    kaarsen, cosmetica, houtbehandeling en waswafels voor nieuwe bijenramen.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
         </main>
@@ -170,12 +311,12 @@
         <footer class="bg-white py-4 mt-auto">
             <div class="container px-5">
                 <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0">Copyright &copy; Your Website 2023</div></div>
+                    <div class="col-auto"><div class="small m-0">Copyright &copy; HoneyQ {{currentYear}}</div></div>
                     <div class="col-auto">
-                        <a class="small" href="#!">Privacy</a>
+                        <!-- <a class="small" href="#!">Privacy</a>
                         <span class="mx-1">&middot;</span>
                         <a class="small" href="#!">Terms</a>
-                        <span class="mx-1">&middot;</span>
+                        <span class="mx-1">&middot;</span> -->
                         <a class="small" href="#!">Contact</a>
                     </div>
                 </div>
