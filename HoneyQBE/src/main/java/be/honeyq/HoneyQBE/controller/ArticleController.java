@@ -21,7 +21,7 @@ public class ArticleController {
 
     @GetMapping("")
 	public List<SimpleArticleDto> findAll() {
-		return articleRepository.findAll().stream().map(article -> SimpleArticleDto.fromDomain(article)).filter(article -> article.getAmountOfStock() > 0).toList();
+		return articleRepository.findAll().stream().map(article -> SimpleArticleDto.fromDomain(article)).filter(article -> article.getAmountOfStock() - article.getReservedStock() > 0).toList();
 	}
 
     @GetMapping("/{id}")
