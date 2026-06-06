@@ -4,7 +4,10 @@
         @for (article of articles; track article.id) {
             <app-article [article]="article" [currentCart]="currentCart()" (onAddToBasket)="addOrUpdateToBasket($event)"></app-article>
         } @empty {
-            <p>Er zijn geen artikels beschikbaar.</p>
+            <div class="text-center mt-4">
+                <p style="font-size: 3rem;">{{ emptyMessage.emoji }}</p>
+                <p class="text-muted">{{ emptyMessage.text }}</p>
+            </div>
         }
     } 
 </div>
