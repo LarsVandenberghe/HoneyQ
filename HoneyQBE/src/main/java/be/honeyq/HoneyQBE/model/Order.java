@@ -42,6 +42,8 @@ public class Order {
   @Column(nullable = true)
   private Date sentDate;
 
+  private String description;
+
   public Order(Set<OrderDetail> orderDetails, User user, OrderStatus status) {
     this.orderDetails = orderDetails;
     this.user = user;
@@ -87,5 +89,13 @@ public class Order {
 
   public void setSentDate(Date sentDate) {
     this.sentDate = sentDate;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
   }
 }

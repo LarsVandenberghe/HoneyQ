@@ -25,8 +25,8 @@ class CartService {
         return this.#httpClient.post<IOrder>(this.#url + `cart/remove-items-from-cart/${cartId}`, undefined);
     }
 
-    makeOrderFromMyCart(cartId: string): Observable<IOrder> {
-        return this.#httpClient.post<IOrder>(this.#url + `cart/make-order-from-cart/${cartId}`, undefined);
+    makeOrderFromMyCart(cartId: string, description: string | undefined): Observable<IOrder> {
+        return this.#httpClient.post<IOrder>(this.#url + `cart/make-order-from-cart/${cartId}`, description);
     }
 }
 
@@ -72,8 +72,8 @@ export class EnhancedCartService {
         );
     }
 
-    makeOrderFromMyCart(cartId: string): Observable<void> {
-        return this.#cartService.makeOrderFromMyCart(cartId).pipe(
+    makeOrderFromMyCart(cartId: string, description: string | undefined): Observable<void> {
+        return this.#cartService.makeOrderFromMyCart(cartId, description).pipe(
             switchMap(() => this.#cartService.findByUser()),
             map(orders => this.currentOrders.set(orders.filter(o => o.status === OrderStatus.CART)))
         );
@@ -110,6 +110,8 @@ export interface IOrder {
     id: string;
     orderDetails: IOrderDetail[];
     status: OrderStatus;
+    sentDate: Date | undefined;
+    description: string | undefined;
 }
 
 export enum OrderStatus {

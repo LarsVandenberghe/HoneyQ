@@ -98,7 +98,7 @@ public class OrderService {
         return cart;
     }
 
-    public void makeOrderFromMyCart(User user, UUID cartID) {
+    public void makeOrderFromMyCart(User user, UUID cartID, String description) {
         var cart = this.orderRepository.getReferenceById(cartID);
 
         if (!cart.getUser().getId().equals(user.getId())) {
@@ -110,6 +110,7 @@ public class OrderService {
 
         cart.setSentDate(new Date());
         cart.setStatus(OrderStatus.SENT);
+        cart.setDescription(description);
         cart = orderRepository.save(cart);
         cart.getOrderDetails().stream().forEach(od -> od.setArticlePriceAfterOrdering(od.getArticle().getPriceInEUR()));
         orderDetailRepository.saveAll(cart.getOrderDetails());

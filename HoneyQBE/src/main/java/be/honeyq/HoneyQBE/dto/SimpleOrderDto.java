@@ -1,4 +1,5 @@
 package be.honeyq.HoneyQBE.dto;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,6 +10,8 @@ public class SimpleOrderDto {
     private UUID id;
     private List<SimpleOrderDetailDto> orderDetails;
     private OrderStatus status;
+    private Date sentDate;
+    private String description;
 
     public static SimpleOrderDto fromDomain(Order order) {
 		var simpleOrder = new SimpleOrderDto();
@@ -28,5 +31,13 @@ public class SimpleOrderDto {
 
     public OrderStatus getStatus() {
         return status;
+    }
+    
+    public Date getSentDate() {
+        return sentDate;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

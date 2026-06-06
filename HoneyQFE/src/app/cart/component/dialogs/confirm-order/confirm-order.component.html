@@ -6,12 +6,27 @@
 <div class="modal-body">
 	<p>Ben je zeker dat je deze items voor een totaal bedrag van <b>€ {{ totalPrice() | number:'1.2-2':'nl-BE'}}</b> wil reserveren?</p>
 	<p>Na reserveren komen de producten jouw kant op. Wij nemen contact met je op voor verdere afhandeling. Je kan dit cash (of met qr code) betalen bij de persoon die je de producten overhandigd.</p>
+
+	<form class="flex-grow-0" style="width: 100%">
+
+		<div class="mb-3">
+			<div>
+				<label for="exampleFormControlTextarea1" class="form-label">Opmerking</label>
+				<textarea 
+					id="exampleFormControlTextarea1"
+					class="form-control"
+					rows="3"
+					(input)=onDescriptionChange($event)
+				></textarea>
+			</div>
+		</div>
+	</form>
 </div>
 <div class="modal-footer">
 	<button type="button" class="btn btn-outline-danger" (click)="modal.dismiss(modalDismissReasons.ESC)">
 		<fa-icon [icon]="faClose" /> Annuleren
 	</button>
-	<button type="button" class="btn btn-primary" (click)="modal.close(true)">
+	<button type="button" class="btn btn-primary" (click)="modal.close({confirmed: true, description: description()})">
 		<fa-icon [icon]="faCheck" /> Reserveren
 	</button>
 </div>

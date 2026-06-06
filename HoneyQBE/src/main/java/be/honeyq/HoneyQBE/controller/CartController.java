@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import be.honeyq.HoneyQBE.dto.SimpleOrderDto;
@@ -75,12 +76,12 @@ public class CartController {
 	}
 
 	@PostMapping("make-order-from-cart/{id}")
-	public void makeOrderFromMyCart(@PathVariable UUID id) {
+	public void makeOrderFromMyCart(@PathVariable UUID id, @RequestBody(required = false) String description) {
         var userId = UserContextHelper.getUserUUID();
 		var user = userRepository.findById(userId).get();
 
 		try {
-			orderService.makeOrderFromMyCart(user, id);
+			orderService.makeOrderFromMyCart(user, id, description);
 		} catch (IllegalArgumentException e) {
 			var reason = e.getMessage();
 			throw new ResponseStatusException(

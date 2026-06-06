@@ -63,8 +63,8 @@ export class CartOverviewComponent {
       modalRef.componentInstance.totalPrice.set(totalPrice);
 
       modalRef.result.then(
-          (result: boolean) => {
-            if (result) { this.#cartService.makeOrderFromMyCart(currentCart.id).subscribe(() => {
+          (result: {confirmed: boolean, description: string | undefined}) => {
+            if (result.confirmed) { this.#cartService.makeOrderFromMyCart(currentCart.id, result.description).subscribe(() => {
               this.#articleService.refreshArticles();
               this.onClose.emit('Order Confirmed!');
             }); }
