@@ -16,9 +16,11 @@ export class ArticleOverviewComponent {
 
   myOrders = computed(() => {
     const orders = this.#orderService.myOrders();
-    return orders?.filter(o => o.status !== OrderStatus.CART).sort((a, b) =>
-      (b.sentDate?.valueOf() ?? new Date().valueOf()) - (a.sentDate?.valueOf() ?? new Date().valueOf())
-    );
+    return orders?.filter(o => o.status !== OrderStatus.CART).sort((a, b) => {
+      const dateA = a.sentDate ? new Date(a.sentDate).valueOf() : 0;
+      const dateB = b.sentDate ? new Date(b.sentDate).valueOf() : 0;
+      return dateB - dateA;
+    });
   });
 
   faRefresh = faRefresh;

@@ -45,7 +45,7 @@ export interface IOrder {
     id: string;
     orderDetails: IOrderDetail[];
     status: OrderStatus;
-    sentDate: Date | undefined;
+    sentDate: string | undefined;
     description: string | undefined;
 }
 
