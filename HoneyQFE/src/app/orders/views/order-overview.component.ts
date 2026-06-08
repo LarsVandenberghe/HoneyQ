@@ -30,7 +30,7 @@ export class ArticleOverviewComponent {
   }
 
   orderTotal(order: IOrder): number {
-    return order.orderDetails.reduce((sum, d) => sum + d.article.priceInEUR * d.quantity, 0);
+    return order.orderDetails.reduce((sum, d) => sum + (d.articlePriceAfterOrdering ?? d.article.priceInEUR) * d.quantity, 0);
   }
 
   statusLabel(status: OrderStatus): string {

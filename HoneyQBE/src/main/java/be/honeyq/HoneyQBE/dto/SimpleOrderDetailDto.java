@@ -8,12 +8,14 @@ public class SimpleOrderDetailDto {
     private UUID id;
     private SimpleArticleDto article;
     private Double quantity;
+    private Double articlePriceAfterOrdering;
 
     public static SimpleOrderDetailDto fromDomain(OrderDetail orderDetail) {
 		var simpleOrderDetail = new SimpleOrderDetailDto();
 		simpleOrderDetail.id = orderDetail.getId();
 		simpleOrderDetail.article = SimpleArticleDto.fromDomain(orderDetail.getArticle());
 		simpleOrderDetail.quantity = orderDetail.getQuantity();
+        simpleOrderDetail.articlePriceAfterOrdering = orderDetail.getArticlePriceAfterOrdering();
         return simpleOrderDetail;
 	}
 
@@ -27,6 +29,10 @@ public class SimpleOrderDetailDto {
 
     public Double getQuantity() {
         return quantity;
+    }
+
+    public Double getArticlePriceAfterOrdering() {
+        return articlePriceAfterOrdering;
     }
 
 }

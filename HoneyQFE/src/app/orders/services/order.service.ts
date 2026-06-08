@@ -61,5 +61,6 @@ export enum OrderStatus {
 export interface IOrderDetail {
     id: string,
     article: IArticle,
-    quantity: number
+    quantity: number,
+    articlePriceAfterOrdering: number | undefined;
 }
