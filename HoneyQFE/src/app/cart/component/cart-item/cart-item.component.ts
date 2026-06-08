@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, computed, input, linkedSignal, OnInit, output } from '@angular/core';
-import { IOrderDetail } from '../../../articles/services/cart.service';
 import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IOrderDetail } from '../../../orders/services/order.service';
 
 @Component({
   selector: 'app-cart-item',

@@ -18,6 +18,8 @@ public class SimpleOrderDto {
 		simpleOrder.id = order.getId();
 		simpleOrder.orderDetails = order.getOrderDetails().stream().map(orderDetail -> SimpleOrderDetailDto.fromDomain(orderDetail)).toList();
 		simpleOrder.status = order.getStatus();
+        simpleOrder.sentDate = order.getSentDate();
+        simpleOrder.description = order.getDescription();
         return simpleOrder;
 	}
     

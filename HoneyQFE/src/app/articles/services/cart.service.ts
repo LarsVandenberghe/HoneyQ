@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { computed, effect, inject, Injectable, signal, TemplateRef, WritableSignal } from "@angular/core";
 import { map, Observable, switchMap, tap } from "rxjs";
-import { IArticle } from "./article.service";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../core/services/auth.service";
 import { environment } from "../../../environments/environment";
+import { IOrder, OrderStatus } from "../../orders/services/order.service";
 
 @Injectable({
     providedIn: 'root',
@@ -104,27 +104,4 @@ export class EnhancedCartService {
             return orders;
         })
     }
-}
-
-export interface IOrder {
-    id: string;
-    orderDetails: IOrderDetail[];
-    status: OrderStatus;
-    sentDate: Date | undefined;
-    description: string | undefined;
-}
-
-export enum OrderStatus {
-    CART = "CART",
-    SENT = "SENT",
-    PAID = "PAID",
-    RECEIVED = "RECEIVED",
-    PAID_AND_RECEIVED = "PAID_AND_RECEIVED",
-    CANCELLED = "CANCELLED"
-}
-
-export interface IOrderDetail {
-    id: string,
-    article: IArticle,
-    quantity: number
 }

@@ -5,7 +5,7 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IArticle } from "../../services/article.service";
 import { faBasketShopping, faCheck, faClose, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FormsModule } from "@angular/forms";
-import { IOrder } from "../../services/cart.service";
+import { IOrder } from "../../../orders/services/order.service";
 
 export enum EnterQuantityResponses {
     ADD,

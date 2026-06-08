@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { faArrowRightFromBracket, faBasketShopping, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBasketShopping, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EnhancedCartService } from '../../articles/services/cart.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
-  imports: [NgbModule, FontAwesomeModule],
+  imports: [NgbModule, FontAwesomeModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -38,6 +39,7 @@ export class HeaderComponent {
   faArrowRightFromBracket = faArrowRightFromBracket
   faUser = faUser
   faBasketShopping = faBasketShopping
+  faClipboardList = faClipboardList
 
   logout(): void {
     this.onLogout.emit();

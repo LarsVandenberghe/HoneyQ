@@ -4,6 +4,7 @@ import { ArticleOverviewComponent } from './articles/views/article-overview/arti
 import { AuthGuard, UserPrivilegeGuard } from './core/auth-guard/auth-guard';
 import { WaitingForApprovalComponent } from './waiting-for-approval/waiting-for-approval.component';
 import { SilentRefreshComponent } from './shared/silent-refresh/silent-refresh.component';
+import { ArticleOverviewComponent as OrderOverviewComponent } from './orders/views/order-overview.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,11 @@ export const routes: Routes = [
   {
     path: 'articles',
     component: ArticleOverviewComponent,
+    canActivate: [UserPrivilegeGuard],
+  },
+  {
+    path: 'my-orders',
+    component: OrderOverviewComponent,
     canActivate: [UserPrivilegeGuard],
   },
 ];

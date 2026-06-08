@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/cor
 import { ModalDismissReasons, NgbActiveModal, NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faCheck, faClose } from "@fortawesome/free-solid-svg-icons";
-import { IOrder } from "../../../../articles/services/cart.service";
 import { DecimalPipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { IOrder } from "../../../../orders/services/order.service";
 
 @Component({
     imports: [NgbModule, FontAwesomeModule, DecimalPipe, FormsModule], 

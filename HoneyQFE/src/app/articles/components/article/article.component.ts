@@ -5,7 +5,7 @@ import { DecimalPipe } from "@angular/common";
 import { faBasketShopping } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { EnterQuantityComponent, EnterQuantityResponses } from "../../dialogs/enter-quantity/enter-quantity.component";
-import { IOrder } from "../../services/cart.service";
+import { IOrder } from "../../../orders/services/order.service";
 
 export interface AddToBaskedEvent {
     response: EnterQuantityResponses, amount: number, articleId: number;

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, output } from '@angular/core';
-import { EnhancedCartService, IOrderDetail } from '../../../articles/services/cart.service';
+import { EnhancedCartService } from '../../../articles/services/cart.service';
 import { faDolly, faQuestion, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CartItemComponent } from '../cart-item/cart-item.component';
@@ -8,6 +8,7 @@ import { sortStringProperty } from '../../../core/helpers/array';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmOrderComponent } from '../dialogs/confirm-order/confirm-order.component';
 import { EnhancedArticleService } from '../../../articles/services/article.service';
+import { IOrderDetail } from '../../../orders/services/order.service';
 
 @Component({
   selector: 'app-cart-overview',
