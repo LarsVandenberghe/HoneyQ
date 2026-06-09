@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <h4 class="modal-title">Status bijwerken</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <p>Huidige status: <strong>{{ currentStatusLabel() }}</strong></p>
+
+  <div class="mb-3">
+    <label for="statusSelect" class="form-label">Nieuwe status</label>
+    <select
+      id="statusSelect"
+      class="form-select"
+      [value]="selectedStatus()"
+      (change)="onStatusChange($any($event.target).value)"
+    >
+      @for (option of statusOptions; track option.value) {
+        <option [value]="option.value">{{ option.label }}</option>
+      }
+    </select>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">
+    <fa-icon [icon]="faClose" /> Annuleren
+  </button>
+  <button type="button" class="btn btn-primary" (click)="modal.close(selectedStatus())">
+    <fa-icon [icon]="faCheck" /> Opslaan
+  </button>
+</div>

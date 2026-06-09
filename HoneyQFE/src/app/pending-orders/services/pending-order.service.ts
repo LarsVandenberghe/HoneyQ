@@ -1,28 +1,36 @@
-import { effect, inject, Injectable, signal, WritableSignal } from "@angular/core";
-import { tap } from "rxjs";
-import { AuthService } from "../../core/services/auth.service";
+import { inject, Injectable, signal, WritableSignal } from "@angular/core";
+import { Observable } from "rxjs";
 import { AdminService } from "../../core/services/admin.service";
-import { IOrder } from "../../my-orders/services/order.service";
+import { IOrder, IOrderDetail, OrderStatus } from "../../my-orders/services/order.service";
 
 @Injectable({
     providedIn: 'root',
 })
 export class EnhancedPeningOrderService {
     #orderService = inject(AdminService);
-
-    // authEffectRef = effect(() => {
-    //     const tokenValid = this.#authService.validToken();
-    //     if (tokenValid) {
-    //         this.#orderService.getPendingOrders().pipe(tap(all => {
-    //             this.pendingOrders.set(all);
-    //             this.authEffectRef.destroy();
-    //         })).subscribe();
-    //     }
-    // })
-
     pendingOrders: WritableSignal<null | IOrder[]> = signal(null);
 
     refreshPendingOrders(): void {
         this.#orderService.getPendingOrders().subscribe(all => this.pendingOrders.set(all));
     }
+
+    updateOrderStatus(id: string, status: OrderStatus): Observable<void> {
+        return this.#orderService.updateOrderStatus(id, status);
+    }
+}
+
+export interface IAdminOrder {
+    id: string;
+    orderDetails: IOrderDetail[];
+    status: OrderStatus;
+    sentDate: string | undefined;
+    description: string | undefined;
+    user: IUser
+}
+
+export interface IUser {
+    emailAddress: string;
+    id: string;
+    firstName: string;
+    lastName: string;
 }

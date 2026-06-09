@@ -21,6 +21,7 @@
               <th>Artikels</th>
               <th class="text-end">Totaal</th>
               <th>Omschrijving</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -45,6 +46,15 @@
                   {{ orderTotal(order) | currency:'EUR':'symbol':'1.2-2':'nl' }}
                 </td>
                 <td class="text-muted">{{ order.description ?? '—' }}</td>
+                <td class="text-end">
+                  <button
+                    class="btn btn-outline-primary btn-sm"
+                    title="Status bijwerken"
+                    (click)="openUpdateStatusDialog(order)"
+                  >
+                    <fa-icon [icon]="faEdit" /> Status
+                  </button>
+                </td>
               </tr>
             }
           </tbody>

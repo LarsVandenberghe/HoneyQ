@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import be.honeyq.HoneyQBE.dto.SimpleAdminOrderDto;
 import be.honeyq.HoneyQBE.dto.SimpleOrderDto;
 import be.honeyq.HoneyQBE.model.OrderStatus;
 import be.honeyq.HoneyQBE.repository.OrderRepository;
@@ -29,9 +30,9 @@ public class AdminController {
     private OrderService orderService;
 
     @GetMapping("pending-orders")
-	public List<SimpleOrderDto> findByUser() {
+	public List<SimpleAdminOrderDto> findByUser() {
 		return orderRepository.pendingOrders().stream()
-				.map(order -> SimpleOrderDto.fromDomain(order))
+				.map(order -> SimpleAdminOrderDto.fromDomain(order))
                 .toList();
 	}
 

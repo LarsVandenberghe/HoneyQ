@@ -16,10 +16,10 @@ export class AdminService {
     }
 
     updateOrderStatus(id: string, status: OrderStatus) {
-        return this.#httpClient.post<IOrder[]>(this.#url + `admin/update-order-status/${id}/status/${status}`, undefined);
+        return this.#httpClient.post<void>(this.#url + `admin/update-order-status/${id}/status/${status}`, undefined);
     }
 
     validateUser(id: string) {
-        return this.#httpClient.post<IOrder[]>(this.#url + `admin/validate-user/${id}`, undefined);
+        return this.#httpClient.post<void>(this.#url + `admin/validate-user/${id}`, undefined);
     }
 }

@@ -18,7 +18,6 @@ export class App implements AfterViewInit {
 
   #authService = inject(AuthService);
   #cartService = inject(EnhancedCartService);
-  #oAuthStorage = inject(OAuthStorage);
 
   protected readonly title = signal('HoneyQFE');
   validToken = this.#authService.validToken;

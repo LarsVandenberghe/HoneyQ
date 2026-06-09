@@ -7,11 +7,11 @@
     </button>
     <div class="navbar-collapse" id="navbarSupportedContent" [ngbCollapse]="isMenuCollapsed">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item" style="border-left: 1px solid rgba(0, 0, 0, 0.2);">
+        <li class="nav-item">
           <a class="nav-link text-black-50" aria-current="page" routerLink="/articles">Artikels</a>
         </li>
         @if(isAdmin()){
-          <li class="nav-item" style="border-left: 1px solid rgba(0, 0, 0, 0.2);">
+          <li class="nav-item">
             <a class="nav-link text-black-50" aria-current="page" routerLink="/pending-orders">Orders in behandeling</a>
           </li>
         }

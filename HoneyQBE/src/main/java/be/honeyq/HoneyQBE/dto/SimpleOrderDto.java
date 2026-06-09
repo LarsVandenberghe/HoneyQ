@@ -2,18 +2,17 @@ package be.honeyq.HoneyQBE.dto;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
 import be.honeyq.HoneyQBE.model.Order;
 import be.honeyq.HoneyQBE.model.OrderStatus;
 
 public class SimpleOrderDto {
-    private UUID id;
-    private List<SimpleOrderDetailDto> orderDetails;
-    private OrderStatus status;
-    private String description;
-    private Date sentDate;
-    private Date paidDate;
-    private Date receivedDate;
+    protected UUID id;
+    protected List<SimpleOrderDetailDto> orderDetails;
+    protected OrderStatus status;
+    protected String description;
+    protected Date sentDate;
+    protected Date paidDate;
+    protected Date receivedDate;
 
 
     public static SimpleOrderDto fromDomain(Order order) {

@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faRefresh } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { EnhancedPeningOrderService as EnhancedPendingOrderService} from '../services/pending-order.service';
 import { IOrder, OrderStatus } from '../../my-orders/services/order.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UpdateStatusComponent } from '../dialogs/update-status/update-status.component';
 
 @Component({
   selector: 'app-pending-order-overview',
@@ -14,6 +16,7 @@ import { IOrder, OrderStatus } from '../../my-orders/services/order.service';
 })
 export class PendingOrderOverviewComponent implements OnInit {
   #orderService = inject(EnhancedPendingOrderService);
+  #modalService = inject(NgbModal);
 
   pendinghOrders = computed(() => {
     const orders = this.#orderService.pendingOrders();
@@ -25,6 +28,7 @@ export class PendingOrderOverviewComponent implements OnInit {
   });
 
   faRefresh = faRefresh;
+  faEdit = faEdit;
 
   ngOnInit(): void {
     this.#orderService.refreshPendingOrders();
@@ -60,5 +64,20 @@ export class PendingOrderOverviewComponent implements OnInit {
       [OrderStatus.CANCELLED]: 'bg-danger',
     };
     return classes[status] ?? 'bg-secondary';
+  }
+
+  openUpdateStatusDialog(order: IOrder): void {
+    const modalRef = this.#modalService.open(UpdateStatusComponent, { centered: true });
+    modalRef.componentInstance.currentStatus.set(order.status);
+    modalRef.componentInstance.selectedStatus.set(order.status);
+
+    modalRef.result.then(
+      (newStatus: OrderStatus) => {
+        this.#orderService.updateOrderStatus(order.id, newStatus).subscribe(() => {
+          this.#orderService.refreshPendingOrders();
+        });
+      },
+      () => {}, // dismissed
+    );
   }
 }
