@@ -12,7 +12,8 @@
         <p>Je hebt nog geen orders geplaatst.</p>
       </div>
     } @else {
-      <div class="table-responsive">
+      <!-- Desktop table (hidden on small screens) -->
+      <div class="table-responsive d-none d-md-block">
         <table class="table table-hover align-middle">
           <thead class="table-light">
             <tr>
@@ -49,6 +50,40 @@
             }
           </tbody>
         </table>
+      </div>
+
+      <!-- Mobile cards (visible on small screens only) -->
+      <div class="d-md-none d-flex flex-column gap-3">
+        @for (order of orders; track order.id) {
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <span class="text-muted small">
+                  {{ order.sentDate ? (order.sentDate | date:'dd/MM/yyyy') : 'Geen datum' }}
+                </span>
+                <span class="badge ms-2" [class]="statusBadgeClass(order.status)">
+                  {{ statusLabel(order.status) }}
+                </span>
+              </div>
+
+              <ul class="list-unstyled mb-1">
+                @for (detail of order.orderDetails; track detail.id) {
+                  <li class="small">{{ detail.quantity }}× {{ detail.article.name }}</li>
+                }
+              </ul>
+
+              <div class="d-flex justify-content-between align-items-center mt-2">
+                <span class="fw-semibold">
+                  {{ orderTotal(order) | currency:'EUR':'symbol':'1.2-2':'nl' }}
+                </span>
+              </div>
+
+              @if (order.description) {
+                <p class="text-muted small mb-0 mt-1">{{ order.description }}</p>
+              }
+            </div>
+          </div>
+        }
       </div>
     }
   } @else {
