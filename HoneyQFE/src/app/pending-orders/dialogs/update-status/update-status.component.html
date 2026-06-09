@@ -4,7 +4,8 @@
 </div>
 
 <div class="modal-body">
-  <p>Huidige status: <strong>{{ currentStatusLabel() }}</strong></p>
+  <p class="mb-1"><strong>Klant:</strong> {{ userName() }}</p>
+  <p class="mb-3"><strong>Huidige status:</strong> {{ currentStatusLabel() }}</p>
 
   <div class="mb-3">
     <label for="statusSelect" class="form-label">Nieuwe status</label>

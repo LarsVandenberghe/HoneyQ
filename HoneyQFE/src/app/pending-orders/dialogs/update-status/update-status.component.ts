@@ -14,8 +14,8 @@ export class UpdateStatusComponent {
     modal = inject(NgbActiveModal);
 
     currentStatus = signal<OrderStatus>(OrderStatus.SENT);
-    
     selectedStatus = signal<OrderStatus>(OrderStatus.SENT);
+    userName = signal<string>('');
 
     faCheck = faCheck;
     faClose = faClose;

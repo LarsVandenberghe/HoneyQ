@@ -3,7 +3,8 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEdit, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { EnhancedPeningOrderService as EnhancedPendingOrderService} from '../services/pending-order.service';
-import { IOrder, OrderStatus } from '../../my-orders/services/order.service';
+import { IAdminOrder, IUser } from '../services/pending-order.service';
+import { OrderStatus } from '../../my-orders/services/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateStatusComponent } from '../dialogs/update-status/update-status.component';
 
@@ -38,8 +39,12 @@ export class PendingOrderOverviewComponent implements OnInit {
     this.#orderService.refreshPendingOrders();
   }
 
-  orderTotal(order: IOrder): number {
+  orderTotal(order: IAdminOrder): number {
     return order.orderDetails.reduce((sum, d) => sum + (d.articlePriceAfterOrdering ?? d.article.priceInEUR) * d.quantity, 0);
+  }
+
+  userName(user: IUser): string {
+    return `${user.firstName} ${user.lastName}`;
   }
 
   statusLabel(status: OrderStatus): string {
@@ -66,10 +71,11 @@ export class PendingOrderOverviewComponent implements OnInit {
     return classes[status] ?? 'bg-secondary';
   }
 
-  openUpdateStatusDialog(order: IOrder): void {
+  openUpdateStatusDialog(order: IAdminOrder): void {
     const modalRef = this.#modalService.open(UpdateStatusComponent, { centered: true });
     modalRef.componentInstance.currentStatus.set(order.status);
     modalRef.componentInstance.selectedStatus.set(order.status);
+    modalRef.componentInstance.userName.set(this.userName(order.user));
 
     modalRef.result.then(
       (newStatus: OrderStatus) => {

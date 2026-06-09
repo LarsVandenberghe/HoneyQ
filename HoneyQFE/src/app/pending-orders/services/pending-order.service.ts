@@ -1,14 +1,14 @@
 import { inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { Observable } from "rxjs";
 import { AdminService } from "../../core/services/admin.service";
-import { IOrder, IOrderDetail, OrderStatus } from "../../my-orders/services/order.service";
+import { IOrderDetail, OrderStatus } from "../../my-orders/services/order.service";
 
 @Injectable({
     providedIn: 'root',
 })
 export class EnhancedPeningOrderService {
     #orderService = inject(AdminService);
-    pendingOrders: WritableSignal<null | IOrder[]> = signal(null);
+    pendingOrders: WritableSignal<null | IAdminOrder[]> = signal(null);
 
     refreshPendingOrders(): void {
         this.#orderService.getPendingOrders().subscribe(all => this.pendingOrders.set(all));
@@ -25,7 +25,7 @@ export interface IAdminOrder {
     status: OrderStatus;
     sentDate: string | undefined;
     description: string | undefined;
-    user: IUser
+    user: IUser;
 }
 
 export interface IUser {
