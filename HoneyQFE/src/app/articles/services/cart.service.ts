@@ -4,7 +4,7 @@ import { map, Observable, switchMap, tap } from "rxjs";
 import { NgbOffcanvas } from "@ng-bootstrap/ng-bootstrap";
 import { AuthService } from "../../core/services/auth.service";
 import { environment } from "../../../environments/environment";
-import { IOrder, OrderStatus } from "../../orders/services/order.service";
+import { IOrder, OrderStatus } from "../../my-orders/services/order.service";
 
 @Injectable({
     providedIn: 'root',

@@ -8,7 +8,7 @@ import { sortStringProperty } from '../../../core/helpers/array';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmOrderComponent } from '../dialogs/confirm-order/confirm-order.component';
 import { EnhancedArticleService } from '../../../articles/services/article.service';
-import { IOrderDetail } from '../../../orders/services/order.service';
+import { IOrderDetail } from '../../../my-orders/services/order.service';
 
 @Component({
   selector: 'app-cart-overview',

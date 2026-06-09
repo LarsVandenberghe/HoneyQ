@@ -1,6 +1,6 @@
 <div>
   @if(validToken()){
-    <app-header (onLogout)="logout()" (onOpenCart)="openCart()" [profile]="profile()"></app-header>
+    <app-header (onLogout)="logout()" (onOpenCart)="openCart()" [profile]="profile()" [isAdmin]="isAdmin()"></app-header>
   }
 </div>
 <div class="container">

@@ -116,6 +116,33 @@ public class OrderService {
         orderDetailRepository.saveAll(cart.getOrderDetails());
     }
 
+    public void updateOrderStatus(UUID orderId, OrderStatus orderStatus) {
+        var order = this.orderRepository.getReferenceById(orderId);
+
+        switch (orderStatus) {
+            case OrderStatus.PAID:
+                order.setPaidDate(new Date());
+                break;
+            case OrderStatus.RECEIVED:
+                order.setReceivedDate(new Date());
+                break;
+            case OrderStatus.PAID_AND_RECEIVED:
+                if(order.getPaidDate() == null){
+                    order.setPaidDate(new Date());
+                }
+                if(order.getReceivedDate() == null){
+                    order.setReceivedDate(new Date());
+                }
+                break;
+            default:
+                break;
+        }
+
+        order.setStatus(orderStatus);
+        this.orderRepository.save(order);
+
+    }
+
     private Double getAvailable(Article article) {
         var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID});
         var totalOrderedQuantity = new ArrayList<>(article.getOrderDetail()).stream().filter(od -> statusses.contains(od.getOrder().getStatus())).map(od -> od.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);

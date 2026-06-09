@@ -44,6 +44,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/article/**").hasRole("validated_user")
                 .requestMatchers("/cart/**").hasRole("validated_user")
                 .requestMatchers("/order/**").hasRole("validated_user")
+                .requestMatchers("/admin/**").hasRole("honeyq_admin")
                 .anyRequest().authenticated()
             )
             .oauth2ResourceServer(oauth2 -> oauth2

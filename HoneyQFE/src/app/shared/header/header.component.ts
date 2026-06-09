@@ -16,6 +16,7 @@ export class HeaderComponent {
   onLogout = output<void>();
   onOpenCart = output<void>();
   profile = input<any>();
+  isAdmin = input<boolean>(false);
 
   isMenuCollapsed = true;
 

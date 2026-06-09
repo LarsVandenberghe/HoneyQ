@@ -10,12 +10,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 })
 export class AuthService {
     profile = signal<any>(null);
-    
-    #roleSubject$ = new BehaviorSubject<string[] | null>(null);
+
     #validTokenSubject$ = new BehaviorSubject<boolean>(false);
-    roles = toSignal(this.#roleSubject$);
-    validToken = toSignal(this.#validTokenSubject$);
-    roles$ = this.#roleSubject$.asObservable();
+    validToken = toSignal(this.#validTokenSubject$,{
+        equal: () => false
+    });
     validToken$ = this.#validTokenSubject$.asObservable();
 
     #oAuthService = inject(OAuthService);
@@ -33,7 +32,6 @@ export class AuthService {
         this.#oAuthService.loadDiscoveryDocumentAndTryLogin().then(() => {
             if (this.#oAuthService.hasValidIdToken()) {
                 this.profile.set(this.#oAuthService.getIdentityClaims());
-                this.#setRolesIfDifferent(this.#oAuthService.getAccessToken());
             }
         });
 
@@ -50,14 +48,17 @@ export class AuthService {
         this.#oAuthService.revokeTokenAndLogout();
         this.#oAuthService.logOut();
         this.profile.set(null);
-        this.#roleSubject$.next(null);
         this.#router.navigateByUrl('home');
     }
 
     refreshToken(): void {
-        this.#oAuthService.silentRefresh().then(() => {
-            this.#setRolesIfDifferent(this.#oAuthStorage.getItem('access_token') ?? '');
-        });
+        this.#oAuthService.silentRefresh();
+    }
+
+    getCurrentRoles(): string[] {
+        const token = this.#oAuthStorage.getItem('access_token');
+        if(!token) return [];
+        return this.#parseJwtRoles(token);
     }
 
     #validateTokenOnEvent(event: OAuthEvent): void {
@@ -66,16 +67,6 @@ export class AuthService {
         }
         
         this.#validTokenSubject$.next(this.#oAuthService.hasValidAccessToken());
-        if (this.#oAuthService.hasValidAccessToken() && event.type === 'token_received') {
-            this.#setRolesIfDifferent(this.#oAuthService.getAccessToken());
-        }
-    }
-
-    #setRolesIfDifferent(token: string): void {
-        const roles = this.#parseJwtRoles(token);
-        if (JSON.stringify(roles.sort()) !== JSON.stringify(this.#roleSubject$.value?.sort())){
-            this.#roleSubject$.next(roles);
-        }
     }
 
     #parseJwtRoles(token: string): string[] {

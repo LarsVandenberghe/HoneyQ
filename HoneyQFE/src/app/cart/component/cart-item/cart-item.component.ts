@@ -3,7 +3,7 @@ import { faMinus, faPlus, faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IOrderDetail } from '../../../orders/services/order.service';
+import { IOrderDetail } from '../../../my-orders/services/order.service';
 
 @Component({
   selector: 'app-cart-item',

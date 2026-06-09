@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
 import { AuthRedirectComponent } from './shared/auth-redirect/auth-redirect.component';
 import { ArticleOverviewComponent } from './articles/views/article-overview/article-overview.component';
-import { AuthGuard, UserPrivilegeGuard } from './core/auth-guard/auth-guard';
+import { AdminGuard, AuthGuard, UserPrivilegeGuard } from './core/auth-guard/auth-guard';
 import { WaitingForApprovalComponent } from './waiting-for-approval/waiting-for-approval.component';
 import { SilentRefreshComponent } from './shared/silent-refresh/silent-refresh.component';
-import { ArticleOverviewComponent as OrderOverviewComponent } from './orders/views/order-overview.component';
+import { MyOrderOverviewComponent } from './my-orders/views/my-order-overview.component';
+import { PendingOrderOverviewComponent } from './pending-orders/views/pending-order-overview.component';
 
 export const routes: Routes = [
   {
@@ -37,7 +38,12 @@ export const routes: Routes = [
   },
   {
     path: 'my-orders',
-    component: OrderOverviewComponent,
+    component: MyOrderOverviewComponent,
     canActivate: [UserPrivilegeGuard],
   },
+  {
+    path: 'pending-orders',
+    component: PendingOrderOverviewComponent,
+    canActivate: [AdminGuard],
+  }
 ];

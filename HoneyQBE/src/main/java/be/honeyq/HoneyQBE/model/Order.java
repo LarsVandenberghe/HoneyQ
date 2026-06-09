@@ -39,10 +39,16 @@ public class Order {
   @Enumerated(EnumType.STRING)
   private OrderStatus status = OrderStatus.CART;
 
+  private String description;
+
   @Column(nullable = true)
   private Date sentDate;
 
-  private String description;
+  @Column(nullable = true)
+  private Date paidDate;
+
+  @Column(nullable = true)
+  private Date receivedDate;
 
   public Order(Set<OrderDetail> orderDetails, User user, OrderStatus status) {
     this.orderDetails = orderDetails;
@@ -83,6 +89,14 @@ public class Order {
     this.status = status;
   }
 
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   public Date getSentDate() {
     return sentDate;
   }
@@ -91,11 +105,19 @@ public class Order {
     this.sentDate = sentDate;
   }
 
-  public String getDescription() {
-    return description;
+    public Date getPaidDate() {
+    return paidDate;
   }
 
-  public void setDescription(String description) {
-    this.description = description;
+  public void setPaidDate(Date paidDate) {
+    this.paidDate = paidDate;
+  }
+
+  public Date getReceivedDate() {
+    return receivedDate;
+  }
+
+  public void setReceivedDate(Date receivedDate) {
+    this.receivedDate = receivedDate;
   }
 }
