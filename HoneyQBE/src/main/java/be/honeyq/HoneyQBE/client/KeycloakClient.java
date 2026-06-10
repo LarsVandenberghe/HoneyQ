@@ -3,11 +3,7 @@ package be.honeyq.HoneyQBE.client;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
-
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -23,6 +19,9 @@ public class KeycloakClient {
     @Value("${honeyq.keycloak-base-url}")
     String keycloakUri;
 
+    @Value("${honeyq.keycloak-validated-user-role-id}")
+    String validatedUserRoleId;
+
     ObjectMapper objectMapper = new ObjectMapper();
 
 	public KeycloakClient(RestClient.Builder restClientBuilder) {
@@ -32,12 +31,14 @@ public class KeycloakClient {
 	public ResponseEntity<Void> setUserValidated(UUID userId) {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 		JwtAuthenticationToken oauthToken = (JwtAuthenticationToken) authentication;
+
+        var body = objectMapper.readValue(String.format("[{ \"name\": \"validated_user\", \"id\": \"%s\"}]", validatedUserRoleId), Object.class);
 		return this.restClient.post().uri(this.keycloakUri + "/admin/realms/honeyq/users/{userId}/role-mappings/realm", userId)
         .headers((headers) -> {
             headers.set("Content-Type", "application/json");
             headers.setBearerAuth(oauthToken.getToken().getTokenValue());
         } )
-        .body("{ \"name\": \"validated_user\"}").retrieve().toBodilessEntity();
+        .body(body).retrieve().toBodilessEntity();
 	}
 
     public List<KeycloakUser> getUsersByValidateRole() {
