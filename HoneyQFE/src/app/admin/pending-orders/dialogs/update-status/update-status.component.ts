@@ -3,7 +3,7 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
-import { OrderStatus } from '../../../my-orders/services/order.service';
+import { OrderStatus } from '../../../../my-orders/services/order.service';
 
 @Component({
     imports: [NgbModule, FontAwesomeModule, FormsModule],

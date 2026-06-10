@@ -1,7 +1,7 @@
 import { inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { Observable } from "rxjs";
-import { AdminService } from "../../core/services/admin.service";
-import { IOrderDetail, OrderStatus } from "../../my-orders/services/order.service";
+import { AdminService } from "../../services/admin.service";
+import { IOrderDetail, OrderStatus } from "../../../my-orders/services/order.service";
 
 @Injectable({
     providedIn: 'root',

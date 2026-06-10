@@ -4,7 +4,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEdit, faRefresh } from '@fortawesome/free-solid-svg-icons';
 import { EnhancedPeningOrderService as EnhancedPendingOrderService} from '../services/pending-order.service';
 import { IAdminOrder, IUser } from '../services/pending-order.service';
-import { OrderStatus } from '../../my-orders/services/order.service';
+import { OrderStatus } from '../../../my-orders/services/order.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UpdateStatusComponent } from '../dialogs/update-status/update-status.component';
 

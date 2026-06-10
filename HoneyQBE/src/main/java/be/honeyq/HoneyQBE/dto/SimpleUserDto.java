@@ -4,10 +4,10 @@ import java.util.UUID;
 import be.honeyq.HoneyQBE.model.User;
 
 public class SimpleUserDto {
-    private String emailAddress;
-    private UUID id;
-    private String firstName;
-    private String lastName;
+    protected String emailAddress;
+    protected UUID id;
+    protected String firstName;
+    protected String lastName;
 
     public static SimpleUserDto fromDomain(User user) {
 

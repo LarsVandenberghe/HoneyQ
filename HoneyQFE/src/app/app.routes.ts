@@ -5,7 +5,8 @@ import { AdminGuard, AuthGuard, UserPrivilegeGuard } from './core/auth-guard/aut
 import { WaitingForApprovalComponent } from './waiting-for-approval/waiting-for-approval.component';
 import { SilentRefreshComponent } from './shared/silent-refresh/silent-refresh.component';
 import { MyOrderOverviewComponent } from './my-orders/views/my-order-overview.component';
-import { PendingOrderOverviewComponent } from './pending-orders/views/pending-order-overview.component';
+import { PendingOrderOverviewComponent } from './admin/pending-orders/views/pending-order-overview.component';
+import { UserOverviewComponent } from './admin/users/views/user-overview.component';
 
 export const routes: Routes = [
   {
@@ -44,6 +45,11 @@ export const routes: Routes = [
   {
     path: 'pending-orders',
     component: PendingOrderOverviewComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'user-roles',
+    component: UserOverviewComponent,
     canActivate: [AdminGuard],
   }
 ];
