@@ -34,4 +34,5 @@ export interface IUserWithValidCheck {
     id: string;
     firstName: string;
     lastName: string;
+    validUser: boolean;
 }

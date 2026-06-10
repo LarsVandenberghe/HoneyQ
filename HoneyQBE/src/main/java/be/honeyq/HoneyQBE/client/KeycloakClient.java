@@ -33,14 +33,14 @@ public class KeycloakClient {
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 		JwtAuthenticationToken oauthToken = (JwtAuthenticationToken) authentication;
 		return this.restClient.post().uri(this.keycloakUri + "/admin/realms/honeyq/users/{userId}/role-mappings/realm", userId)
-        .headers((headers) -> headers.setBearerAuth(oauthToken.getToken().getTokenValue()))
+        .headers((headers) -> {
+            headers.set("Content-Type", "application/json");
+            headers.setBearerAuth(oauthToken.getToken().getTokenValue());
+        } )
         .body("{ \"name\": \"validated_user\"}").retrieve().toBodilessEntity();
 	}
 
     public List<KeycloakUser> getUsersByValidateRole() {
-
-    
-
         var authentication = SecurityContextHolder.getContext().getAuthentication();
 		JwtAuthenticationToken oauthToken = (JwtAuthenticationToken) authentication;
         var token = oauthToken.getToken().getTokenValue();

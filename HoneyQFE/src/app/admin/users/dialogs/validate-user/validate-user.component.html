@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title">Gebruiker valideren</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <p>Weet je zeker dat je deze gebruiker wil valideren?</p>
+  <p class="mb-1"><strong>Naam:</strong> {{ userName() }}</p>
+  <p class="mb-0"><strong>Email:</strong> {{ userEmail() }}</p>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss()">
+    <fa-icon [icon]="faClose" /> Annuleren
+  </button>
+  <button type="button" class="btn btn-success" (click)="modal.close(true)">
+    <fa-icon [icon]="faCheck" /> Valideren
+  </button>
+</div>

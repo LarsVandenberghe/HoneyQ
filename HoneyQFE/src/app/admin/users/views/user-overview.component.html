@@ -1,1 +1,82 @@
-Test
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">Gebruikersbeheer</h4>
+    <button class="btn btn-outline-secondary btn-sm" (click)="refresh()">
+      <fa-icon [icon]="faRefresh" /> Vernieuwen
+    </button>
+  </div>
+
+  @if (users(); as userList) {
+    @if (userList.length === 0) {
+      <div class="text-center text-muted mt-5">
+        <p>Geen gebruikers gevonden.</p>
+      </div>
+    } @else {
+      <!-- Desktop table (hidden on small screens) -->
+      <div class="table-responsive d-none d-md-block">
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Naam</th>
+              <th>E-mailadres</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (user of userList; track user.id) {
+              <tr>
+                <td class="text-nowrap">
+                  <div class="fw-semibold">{{ user.firstName }} {{ user.lastName }}</div>
+                </td>
+                <td class="text-muted">{{ user.emailAddress }}</td>
+                <td class="text-end">
+                    <button
+                      class="btn btn-sm"
+                      [class.btn-outline-success]="!user.validUser"
+                      title="Gebruiker valideren"
+                      [disabled]="user.validUser"
+                      (click)="openValidateDialog(user)"
+                    >
+                      <fa-icon [icon]="faUserCheck" /> Valideren
+                    </button>
+
+
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mobile cards (visible on small screens only) -->
+      <div class="d-md-none d-flex flex-column gap-3">
+        @for (user of userList; track user.id) {
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-semibold">{{ user.firstName }} {{ user.lastName }}</div>
+                  <small class="text-muted">{{ user.emailAddress }}</small>
+                </div>
+                <button                      
+                  class="btn btn-sm ms-2"
+                  [class.btn-outline-success]="!user.validUser"
+                  [disabled]="user.validUser"
+                  (click)="openValidateDialog(user)"
+                >
+                  <fa-icon [icon]="faUserCheck" /> Valideren
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  } @else {
+    <div class="text-center mt-5">
+      <div class="spinner-border text-secondary" role="status">
+        <span class="visually-hidden">Laden...</span>
+      </div>
+    </div>
+  }
+</div>
