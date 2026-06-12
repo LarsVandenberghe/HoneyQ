@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, output } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { faArrowRightFromBracket, faBasketShopping, faClipboardList, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBasketShopping, faClipboardList, faListCheck, faScrewdriverWrench, faUser, faUsersGear } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EnhancedCartService } from '../../articles/services/cart.service';
 import { RouterLink } from '@angular/router';
@@ -37,10 +37,13 @@ export class HeaderComponent {
 
   cartItemCount = computed(() => this.#cartService.currentCart()?.orderDetails?.length ?? 0);
 
-  faArrowRightFromBracket = faArrowRightFromBracket
-  faUser = faUser
-  faBasketShopping = faBasketShopping
-  faClipboardList = faClipboardList
+  faArrowRightFromBracket = faArrowRightFromBracket;
+  faUser = faUser;
+  faBasketShopping = faBasketShopping;
+  faClipboardList = faClipboardList;
+  faScrewdriverWrench = faScrewdriverWrench;
+  faUsersGear = faUsersGear;
+  faListCheck = faListCheck;
 
   logout(): void {
     this.onLogout.emit();
