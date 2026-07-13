@@ -17,7 +17,7 @@ public class SimpleArticleDto {
 	private Double reservedStock;
 
     public static SimpleArticleDto fromDomain(Article article) {
-        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID});
+        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID, OrderStatus.RECEIVED, OrderStatus.PAID_AND_RECEIVED});
 
 		var simpleArticle = new SimpleArticleDto();
 		simpleArticle.id = article.getId();

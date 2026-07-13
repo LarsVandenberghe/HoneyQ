@@ -144,7 +144,7 @@ public class OrderService {
     }
 
     private Double getAvailable(Article article) {
-        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID});
+        var statusses = Arrays.asList(new OrderStatus[] {OrderStatus.SENT, OrderStatus.PAID, OrderStatus.RECEIVED, OrderStatus.PAID_AND_RECEIVED});
         var totalOrderedQuantity = new ArrayList<>(article.getOrderDetail()).stream().filter(od -> statusses.contains(od.getOrder().getStatus())).map(od -> od.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
         var allStock = article.getStock().stream().map(stockItem -> stockItem.getQuantity()).reduce(0.0, (subtotal, element) -> subtotal + element);
         return allStock - totalOrderedQuantity;
